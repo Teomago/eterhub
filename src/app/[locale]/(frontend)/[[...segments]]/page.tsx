@@ -28,12 +28,12 @@ export async function generateStaticParams() {
 const VALID_LOCALES = ['en', 'es']
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { isEnabled: draft } = await draftMode()
   const { segments, locale } = await params
 
   // Guard: reject invalid locales before any DB query
   if (!VALID_LOCALES.includes(locale)) return {}
 
+  const { isEnabled: draft } = await draftMode()
   const page = await getPage({ segments, draft, locale })
 
   if (page) {
@@ -53,12 +53,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params, searchParams }: Props) {
-  const { isEnabled: draft } = await draftMode()
   const { segments, locale } = await params
 
   // Guard: reject invalid locales before any DB query
   if (!VALID_LOCALES.includes(locale)) notFound()
 
+  const { isEnabled: draft } = await draftMode()
   const page = await getPage({ segments, draft, locale })
 
   if (page) {
