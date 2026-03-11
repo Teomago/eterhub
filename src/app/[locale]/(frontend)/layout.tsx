@@ -62,7 +62,8 @@ export default async function RootLayout(props: { children: React.ReactNode, par
   const hasHomePage = homeResult.totalDocs > 0
 
   // Get locale messages for client components (e.g. LanguageSwitcher)
-  const messages = await getMessages()
+  // Explicitly passing { locale } prevents getMessages from reading headers() internally
+  const messages = await getMessages({ locale })
 
   return (
     <html lang={locale} suppressHydrationWarning>

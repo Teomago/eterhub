@@ -1,5 +1,10 @@
 import React from 'react'
 import type { Metadata } from 'next'
+
+// TODO: Refactor searchParams to a Suspense child component 
+// to restore static caching on marketing pages (post-launch optimization)
+export const dynamic = 'force-dynamic'
+
 import { notFound } from 'next/navigation'
 import { draftMode } from 'next/headers'
 import { getPage, getPageStaticParams } from '@/modules/pages/data'
