@@ -24,7 +24,14 @@ export const Pages: CollectionConfig = {
     defaultColumns: ['title', 'pathname', 'updatedAt'],
     listSearchableFields: ['title', 'pathname'],
     group: adminMenuGroups.content,
-    preview: (data) => generatePreviewPath({ pathname: `${data?.pathname}` }),
+    preview: (data, { locale }) => {
+      const activeLocale = locale || 'en'
+      const pathname = typeof data?.pathname === 'string' ? data.pathname : '/'
+      const localizedPath = pathname.startsWith('/') 
+        ? `/${activeLocale}${pathname}` 
+        : `/${activeLocale}/${pathname}`
+      return generatePreviewPath({ pathname: localizedPath })
+    },
   },
   trash: true,
   versions: { drafts: true },
