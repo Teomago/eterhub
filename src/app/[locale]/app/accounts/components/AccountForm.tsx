@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { useTranslations } from 'next-intl'
 import { useForm } from '@tanstack/react-form'
 import { z } from 'zod'
 import { Button } from '@/components/buttons/Button'
@@ -45,6 +46,7 @@ interface AccountFormProps {
 export function AccountForm({ account, onSuccess }: AccountFormProps) {
   const router = useRouter()
   const queryClient = useQueryClient()
+  const t = useTranslations('Miru')
   const form = useForm({
     defaultValues: {
       name: account?.name || '',
@@ -84,8 +86,8 @@ export function AccountForm({ account, onSuccess }: AccountFormProps) {
     <Card className={!account ? 'w-full max-w-lg mx-auto' : 'border-0 shadow-none'}>
       {!account && (
         <CardHeader>
-          <CardTitle>Create Account</CardTitle>
-          <CardDescription>Add a new financial account to track.</CardDescription>
+          <CardTitle>{t('accounts.createAccount')}</CardTitle>
+          <CardDescription>{t('accounts.addAccountDesc')}</CardDescription>
         </CardHeader>
       )}
       <CardContent className={account ? 'p-0' : ''}>
@@ -108,7 +110,7 @@ export function AccountForm({ account, onSuccess }: AccountFormProps) {
           >
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Account Name</Label>
+                <Label htmlFor={field.name}>{t('accounts.accountName')}</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -127,7 +129,7 @@ export function AccountForm({ account, onSuccess }: AccountFormProps) {
           <form.Field name="type">
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Account Type</Label>
+                <Label htmlFor={field.name}>{t('accounts.accountType')}</Label>
                 <Select
                   value={field.state.value}
                   onValueChange={(val) =>
@@ -137,14 +139,14 @@ export function AccountForm({ account, onSuccess }: AccountFormProps) {
                   }
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select type" />
+                    <SelectValue placeholder={t('accounts.selectType')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="checking">Checking</SelectItem>
-                    <SelectItem value="savings">Savings</SelectItem>
-                    <SelectItem value="credit">Credit Card</SelectItem>
-                    <SelectItem value="cash">Cash</SelectItem>
-                    <SelectItem value="investment">Investment</SelectItem>
+                    <SelectItem value="checking">{t('accounts.checking')}</SelectItem>
+                    <SelectItem value="savings">{t('accounts.savings')}</SelectItem>
+                    <SelectItem value="credit">{t('accounts.creditCard')}</SelectItem>
+                    <SelectItem value="cash">{t('accounts.cash')}</SelectItem>
+                    <SelectItem value="investment">{t('accounts.investment')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -155,7 +157,7 @@ export function AccountForm({ account, onSuccess }: AccountFormProps) {
             <form.Field name="currency">
               {(field) => (
                 <div className="space-y-2">
-                  <Label htmlFor={field.name}>Currency</Label>
+                  <Label htmlFor={field.name}>{t('accounts.currency')}</Label>
                   <Select
                     value={field.state.value}
                     onValueChange={(val) =>
@@ -163,7 +165,7 @@ export function AccountForm({ account, onSuccess }: AccountFormProps) {
                     }
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select currency" />
+                      <SelectValue placeholder={t('accounts.selectCurrency')} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="USD">USD</SelectItem>
@@ -179,7 +181,7 @@ export function AccountForm({ account, onSuccess }: AccountFormProps) {
             <form.Field name="color">
               {(field) => (
                 <div className="space-y-2">
-                  <Label htmlFor={field.name}>Color</Label>
+                  <Label htmlFor={field.name}>{t('accounts.color')}</Label>
                   <div className="flex items-center gap-2">
                     <Input
                       id={field.name}
@@ -256,7 +258,7 @@ export function AccountForm({ account, onSuccess }: AccountFormProps) {
             >
               {(field) => (
                 <div className="space-y-2">
-                  <Label htmlFor={field.name}>Credit Limit</Label>
+                  <Label htmlFor={field.name}>{t('accounts.creditLimit')}</Label>
                   <Input
                     id={field.name}
                     name={field.name}

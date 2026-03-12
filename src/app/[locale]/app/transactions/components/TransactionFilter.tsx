@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState, useTransition } from 'react'
+import { useTranslations } from 'next-intl'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { Input } from '@/components/ui/input'
 import {
@@ -25,6 +26,7 @@ export function TransactionFilter({ accounts, categories }: TransactionFilterPro
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [isPending, startTransition] = useTransition()
+  const t = useTranslations('Miru')
 
   // State for filters
   const [search, setSearch] = useState(searchParams.get('description') || '')
@@ -142,7 +144,7 @@ export function TransactionFilter({ accounts, categories }: TransactionFilterPro
         <div className="relative">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search..."
+            placeholder={t('transactions.search')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="pl-9"
@@ -152,36 +154,36 @@ export function TransactionFilter({ accounts, categories }: TransactionFilterPro
         {/* Date Range */}
         <Select value={dateRange} onValueChange={setDateRange}>
           <SelectTrigger>
-            <SelectValue placeholder="Date Range" />
+            <SelectValue placeholder={t('transactions.dateRange')} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Time</SelectItem>
-            <SelectItem value="thisMonth">This Month</SelectItem>
-            <SelectItem value="lastMonth">Last Month</SelectItem>
-            <SelectItem value="last3Months">Last 3 Months</SelectItem>
-            <SelectItem value="thisYear">This Year</SelectItem>
+            <SelectItem value="all">{t('transactions.allTime')}</SelectItem>
+            <SelectItem value="thisMonth">{t('transactions.thisMonth')}</SelectItem>
+            <SelectItem value="lastMonth">{t('transactions.lastMonth')}</SelectItem>
+            <SelectItem value="last3Months">{t('transactions.last3Months')}</SelectItem>
+            <SelectItem value="thisYear">{t('transactions.thisYear')}</SelectItem>
           </SelectContent>
         </Select>
 
         {/* Type */}
         <Select value={type} onValueChange={setType}>
           <SelectTrigger>
-            <SelectValue placeholder="Type" />
+            <SelectValue placeholder={t('transactions.type')} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Types</SelectItem>
-            <SelectItem value="income">Income</SelectItem>
-            <SelectItem value="expense">Expense</SelectItem>
+            <SelectItem value="all">{t('transactions.allTypes')}</SelectItem>
+            <SelectItem value="income">{t('transactions.income')}</SelectItem>
+            <SelectItem value="expense">{t('transactions.expense')}</SelectItem>
           </SelectContent>
         </Select>
 
         {/* Category */}
         <Select value={category} onValueChange={setCategory}>
           <SelectTrigger>
-            <SelectValue placeholder="Category" />
+            <SelectValue placeholder={t('transactions.category')} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Categories</SelectItem>
+            <SelectItem value="all">{t('transactions.allCategories')}</SelectItem>
             {categories.map((cat) => (
               <SelectItem key={cat.id} value={cat.id}>
                 {cat.name}
@@ -193,10 +195,10 @@ export function TransactionFilter({ accounts, categories }: TransactionFilterPro
         {/* Account */}
         <Select value={account} onValueChange={setAccount}>
           <SelectTrigger>
-            <SelectValue placeholder="Account" />
+            <SelectValue placeholder={t('transactions.account')} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Accounts</SelectItem>
+            <SelectItem value="all">{t('transactions.allAccounts')}</SelectItem>
             {accounts.map((acc) => (
               <SelectItem key={acc.id} value={acc.id}>
                 {acc.name}
@@ -208,11 +210,11 @@ export function TransactionFilter({ accounts, categories }: TransactionFilterPro
         {/* Sort */}
         <Select value={sort} onValueChange={setSort}>
           <SelectTrigger>
-            <SelectValue placeholder="Sort" />
+            <SelectValue placeholder={t('transactions.sort')} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="-date">Newest First</SelectItem>
-            <SelectItem value="date">Oldest First</SelectItem>
+            <SelectItem value="-date">{t('transactions.newestFirst')}</SelectItem>
+            <SelectItem value="date">{t('transactions.oldestFirst')}</SelectItem>
             <SelectItem value="-amount">Amount (High-Low)</SelectItem>
             <SelectItem value="amount">Amount (Low-High)</SelectItem>
           </SelectContent>

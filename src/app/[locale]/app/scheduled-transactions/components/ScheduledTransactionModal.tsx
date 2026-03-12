@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import type { Account, Category } from '@/payload-types'
@@ -18,6 +19,7 @@ export function ScheduledTransactionModal({
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [open, setOpen] = useState(false)
+  const t = useTranslations('Miru')
 
   const isAddingSub = searchParams.get('addSub') === 'true'
 
@@ -48,8 +50,8 @@ export function ScheduledTransactionModal({
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-[500px]">
         <VisuallyHidden>
-          <DialogTitle>Add Subscription</DialogTitle>
-          <DialogDescription>A form to add new recurring bills.</DialogDescription>
+          <DialogTitle>{t('scheduled.addSubscription')}</DialogTitle>
+          <DialogDescription>{t('scheduled.formToAdd')}</DialogDescription>
         </VisuallyHidden>
         <div className="py-4">
           <ScheduledTransactionForm

@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import {
   Dialog,
@@ -16,6 +17,7 @@ export function AccountModal() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [open, setOpen] = useState(false)
+  const t = useTranslations('Miru')
 
   const isAddingAccount = searchParams.get('addAccount') === 'true'
 
@@ -45,8 +47,8 @@ export function AccountModal() {
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader className="mb-4">
-          <DialogTitle>Add Account</DialogTitle>
-          <DialogDescription>Create a new financial account or wallet.</DialogDescription>
+          <DialogTitle>{t('accounts.addAccount')}</DialogTitle>
+          <DialogDescription>{t('accounts.createAccountOrWallet')}</DialogDescription>
         </DialogHeader>
         <div className="py-4">
           <AccountForm onSuccess={handleSuccess} />

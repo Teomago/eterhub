@@ -4,7 +4,7 @@ import { getPayload } from '@/lib/payload/getPayload'
 import { headers } from 'next/headers'
 
 export const metadata = {
-  title: 'Import Transactions | EtherHub Finance',
+  title: 'Import Transactions | Miru',
   description: 'Bulk import your transactions via CSV.',
 }
 
@@ -47,7 +47,7 @@ export default async function ImportPage() {
         </p>
         <div className="relative">
           <pre className="p-4 bg-background border border-border rounded text-sm text-foreground overflow-x-auto whitespace-pre-wrap">
-            Actúa como un asistente financiero. Tengo estos datos bancarios en bruto. Por favor, conviértelos a un formato CSV estricto con los siguientes encabezados exactos: Date,Description,Amount,Type,CategoryName,AccountName. Reglas: 1. 'Date' debe ser YYYY-MM-DD. 2. 'Amount' debe ser un número decimal positivo sin símbolos de moneda. 3. 'Type' solo puede ser 'income' o 'expense'. 4. Asigna un 'CategoryName' lógico de 1 o 2 palabras en español. 5. 'AccountName' debe ser '[Nombre de mi cuenta en Eterhub]'. Solo devuélveme el bloque de código CSV.
+            Actúa como un asistente financiero. Tengo estos datos bancarios en bruto. Por favor, conviértelos a un formato CSV estricto con los siguientes encabezados exactos: Date,Description,Amount,Type,CategoryName,AccountName. Reglas: 1. 'Date' debe ser YYYY-MM-DD. 2. 'Amount' debe ser un número decimal positivo sin símbolos de moneda. 3. 'Type' solo puede ser 'income' o 'expense'. 4. Asigna un 'CategoryName' lógico de 1 o 2 palabras en español. 5. 'AccountName' debe ser '[Nombre de mi cuenta en Heionhub]'. Solo devuélveme el bloque de código CSV.
           </pre>
         </div>
       </div>

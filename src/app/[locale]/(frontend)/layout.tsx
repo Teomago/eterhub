@@ -20,8 +20,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: {
-      default: seo.siteName || 'EtherHub',
-      template: `%s | ${seo.siteName || 'EtherHub'}`,
+      default: seo.siteName || 'Heionhub',
+      template: `%s | ${seo.siteName || 'Heionhub'}`,
     },
     description: seo.tagline || '',
   }

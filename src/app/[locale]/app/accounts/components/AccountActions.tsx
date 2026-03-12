@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,6 +40,7 @@ export function AccountActions({ account }: AccountActionsProps) {
   const [openEdit, setOpenEdit] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
   const router = useRouter()
+  const t = useTranslations('Miru')
 
   const { mutate: deleteAccount, isPending: isDeleting } = useDeleteAccount()
 
@@ -74,8 +76,8 @@ export function AccountActions({ account }: AccountActionsProps) {
       <Dialog open={openEdit} onOpenChange={setOpenEdit}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Edit Account</DialogTitle>
-            <DialogDescription>Update account details.</DialogDescription>
+            <DialogTitle>{t('accounts.editAccount')}</DialogTitle>
+            <DialogDescription>{t('accounts.updateDetails')}</DialogDescription>
           </DialogHeader>
           <AccountForm
             account={account}
@@ -90,13 +92,13 @@ export function AccountActions({ account }: AccountActionsProps) {
       <AlertDialog open={openDelete} onOpenChange={setOpenDelete}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>{t('accounts.areYouSure')}</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will orphan its transactions.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t('accounts.cancel')}</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => deleteAccount(account.id)}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"

@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { MoreHorizontal, Trash, Edit } from 'lucide-react'
 import {
   DropdownMenu,
@@ -45,6 +46,7 @@ export function TransactionActions({ transaction, accounts, categories }: Transa
   const [isDeleting, setIsDeleting] = useState(false)
   const router = useRouter()
   const queryClient = useQueryClient()
+  const t = useTranslations('Miru')
 
   const handleDelete = async () => {
     setIsDeleting(true)
@@ -88,14 +90,14 @@ export function TransactionActions({ transaction, accounts, categories }: Transa
       <AlertDialog open={openDelete} onOpenChange={setOpenDelete}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>{t('transactions.areYouSure')}</AlertDialogTitle>
             <AlertDialogDescription>
               This will permanently delete this transaction and revert its effect on your account
               balance.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
+            <AlertDialogCancel disabled={isDeleting}>{t('transactions.cancel')}</AlertDialogCancel>
             <AlertDialogAction
               onClick={(e) => {
                 e.preventDefault()
@@ -113,8 +115,8 @@ export function TransactionActions({ transaction, accounts, categories }: Transa
       <Dialog open={openEdit} onOpenChange={setOpenEdit}>
         <DialogContent className="max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Edit Transaction</DialogTitle>
-            <DialogDescription>Make changes to your transaction here.</DialogDescription>
+            <DialogTitle>{t('transactions.editTransaction')}</DialogTitle>
+            <DialogDescription>{t('transactions.makeChanges')}</DialogDescription>
           </DialogHeader>
           <TransactionForm
             accounts={accounts}

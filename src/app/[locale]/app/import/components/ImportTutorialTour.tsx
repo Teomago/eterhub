@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { TourProvider, useTour } from '@/components/ui/tour'
 import { tourSteps } from '@/lib/tour-constants'
 import { FileDown, RefreshCw } from 'lucide-react'
@@ -41,6 +42,7 @@ export function ImportTutorialTour({
   tutorialUrl: string
   hasCompleted: boolean
 }) {
+  const t = useTranslations('Miru')
   // Define the tour steps specific to the import process
   const steps = [
     {
@@ -48,7 +50,7 @@ export function ImportTutorialTour({
       title: 'Welcome to Bulk Import',
       content: (
         <div className="space-y-3">
-          <p>This tool allows you to instantly upload hundreds of past transactions.</p>
+          <p>{t('import.tutorialText')}</p>
           <p className="font-semibold mt-2">Before you begin:</p>
           <ul className="list-disc pl-4 text-sm text-muted-foreground space-y-1">
             <li>

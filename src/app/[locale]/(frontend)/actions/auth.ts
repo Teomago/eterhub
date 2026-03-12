@@ -75,7 +75,7 @@ export async function registerMember(formData: FormData, invitationCode: string,
         lastName,
         secondLastName,
         currency: 'COP',
-        preferredLocale: locale,
+        preferredLocale: locale as 'en' | 'es',
       },
       req,
     })

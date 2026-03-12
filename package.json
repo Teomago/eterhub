@@ -1,7 +1,7 @@
 {
-  "name": "eterhub",
+  "name": "heionhub",
   "version": "0.8.3",
-  "description": "EterHub — One Place to be Organized",
+  "description": "Heionhub — One Place to be Organized",
   "license": "MIT",
   "type": "module",
   "scripts": {

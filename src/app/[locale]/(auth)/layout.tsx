@@ -27,7 +27,7 @@ export default async function AuthLayout(props: { children: React.ReactNode, par
                     {t('backToHome')}
                   </span>
                 </Link>
-                <div className="font-bold text-xl tracking-tight">EterHub</div>
+                <div className="font-bold text-xl tracking-tight">Heionhub</div>
               </header>
 
               {/* Main Content (Centered) */}

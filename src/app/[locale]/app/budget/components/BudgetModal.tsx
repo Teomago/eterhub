@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import {
   Dialog,
@@ -17,6 +18,7 @@ export function BudgetModal({ categories }: { categories: Category[] }) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [open, setOpen] = useState(false)
+  const t = useTranslations('Miru')
 
   const isAddingBudget = searchParams.get('addBudget') === 'true'
 
@@ -46,8 +48,8 @@ export function BudgetModal({ categories }: { categories: Category[] }) {
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader className="mb-4">
-          <DialogTitle>Create Budget</DialogTitle>
-          <DialogDescription>Set spending limits on your categories.</DialogDescription>
+          <DialogTitle>{t('budget.createBudget')}</DialogTitle>
+          <DialogDescription>{t('budget.setSpendingLimits')}</DialogDescription>
         </DialogHeader>
         <div className="py-4">
           <BudgetForm categories={categories} onSuccess={handleSuccess} />

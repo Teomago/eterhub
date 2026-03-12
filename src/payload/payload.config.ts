@@ -32,6 +32,9 @@ export default buildConfig({
   email: brevoAdapter(),
   admin: {
     user: 'users',
+    meta: {
+      titleSuffix: '— Heionhub',
+    },
     importMap: {
       baseDir: path.resolve(dirname),
     },

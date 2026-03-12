@@ -51,7 +51,7 @@ export function SidebarLayout({ children, isMultiLangEnabled = true }: { childre
           <div className="mb-5 flex items-center justify-between ps-2.5">
             <Link href="/app" className="flex items-center">
               <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-                Finance App
+                Miru
               </span>
             </Link>
             <Button
@@ -153,7 +153,7 @@ export function SidebarLayout({ children, isMultiLangEnabled = true }: { childre
             {isOpen ? <PanelLeftClose className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
           <div className="flex-1 flex items-center justify-between">
-            <span className="font-semibold text-lg tracking-tight">EtherHub</span>
+            <span className="font-semibold text-lg tracking-tight">Heionhub</span>
             <div className="flex items-center gap-2">
               <LanguageSwitcher isMultiLangEnabled={isMultiLangEnabled} />
               <ThemeToggle />

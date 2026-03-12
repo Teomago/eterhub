@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -42,6 +43,7 @@ export function BudgetActions({ budget, categories }: BudgetActionsProps) {
   const [openDelete, setOpenDelete] = useState(false)
   const [openLock, setOpenLock] = useState(false)
   const router = useRouter()
+  const t = useTranslations('Miru')
 
   const { mutate: deleteBudget, isPending: isDeleting } = useDeleteBudget()
   const { mutate: toggleLock, isPending: isToggling } = useToggleBudgetLock()
@@ -91,8 +93,8 @@ export function BudgetActions({ budget, categories }: BudgetActionsProps) {
       <Dialog open={openEdit} onOpenChange={setOpenEdit}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Edit Budget</DialogTitle>
-            <DialogDescription>Make changes to your budget.</DialogDescription>
+            <DialogTitle>{t('budget.editBudget')}</DialogTitle>
+            <DialogDescription>{t('budget.makeChanges')}</DialogDescription>
           </DialogHeader>
           <BudgetForm
             categories={categories}
@@ -136,13 +138,13 @@ export function BudgetActions({ budget, categories }: BudgetActionsProps) {
       <AlertDialog open={openDelete} onOpenChange={setOpenDelete}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>{t('budget.areYouSure')}</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will permanently delete this budget.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t('budget.cancel')}</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => deleteBudget(budget.id)}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"

@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,6 +40,7 @@ export function CategoryActions({ category }: CategoryActionsProps) {
   const [openEdit, setOpenEdit] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
   const router = useRouter()
+  const t = useTranslations('Miru')
 
   const { mutate: deleteCategory, isPending: isDeleting } = useDeleteCategory()
 
@@ -74,8 +76,8 @@ export function CategoryActions({ category }: CategoryActionsProps) {
       <Dialog open={openEdit} onOpenChange={setOpenEdit}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Edit Category</DialogTitle>
-            <DialogDescription>Make changes to your category.</DialogDescription>
+            <DialogTitle>{t('categories.editCategory')}</DialogTitle>
+            <DialogDescription>{t('categories.makeChanges')}</DialogDescription>
           </DialogHeader>
           <CategoryForm
             category={category}
@@ -90,13 +92,13 @@ export function CategoryActions({ category }: CategoryActionsProps) {
       <AlertDialog open={openDelete} onOpenChange={setOpenDelete}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>{t('categories.areYouSure')}</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This might affect existing transactions mapped to this category.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t('categories.cancel')}</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => deleteCategory(category.id)}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"

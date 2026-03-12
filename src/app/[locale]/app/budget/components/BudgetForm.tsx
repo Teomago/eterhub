@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { useTranslations } from 'next-intl'
 import { useForm } from '@tanstack/react-form'
 import { z } from 'zod'
 import { Button } from '@/components/buttons/Button'
@@ -44,6 +45,7 @@ interface BudgetFormProps {
 export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
   const router = useRouter()
   const queryClient = useQueryClient()
+  const t = useTranslations('Miru')
   const form = useForm({
     defaultValues: {
       category:
@@ -85,8 +87,8 @@ export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
     <Card className={!budget ? 'w-full max-w-lg mx-auto' : 'border-0 shadow-none'}>
       {!budget && (
         <CardHeader>
-          <CardTitle>Set Budget</CardTitle>
-          <CardDescription>Limit spending for a category.</CardDescription>
+          <CardTitle>{t('budget.setBudget')}</CardTitle>
+          <CardDescription>{t('budget.limitSpending')}</CardDescription>
         </CardHeader>
       )}
       <CardContent className={budget ? 'p-0' : ''}>
@@ -109,10 +111,10 @@ export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
           >
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Category</Label>
+                <Label htmlFor={field.name}>{t('budget.category')}</Label>
                 <Select value={field.state.value} onValueChange={(val) => field.handleChange(val)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select category" />
+                    <SelectValue placeholder={t('budget.selectCategory')} />
                   </SelectTrigger>
                   <SelectContent>
                     {categories.map((cat) => (
@@ -167,7 +169,7 @@ export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
           >
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Monthly Limit</Label>
+                <Label htmlFor={field.name}>{t('budget.monthlyLimit')}</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -191,7 +193,7 @@ export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
           <form.Field name="month">
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Month</Label>
+                <Label htmlFor={field.name}>{t('budget.month')}</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -209,7 +211,7 @@ export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
               <form.Field name="recurrenceType">
                 {(field) => (
                   <div className="space-y-2">
-                    <Label htmlFor={field.name}>Recurrence</Label>
+                    <Label htmlFor={field.name}>{t('budget.recurrence')}</Label>
                     <Select
                       value={field.state.value}
                       onValueChange={(val: any) => field.handleChange(val)}
@@ -219,7 +221,7 @@ export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="monthly">One-time</SelectItem>
-                        <SelectItem value="fixed">Fixed Duration</SelectItem>
+                        <SelectItem value="fixed">{t('budget.fixedDuration')}</SelectItem>
                         <SelectItem value="indefinite">Indefinite (1 Year)</SelectItem>
                       </SelectContent>
                     </Select>

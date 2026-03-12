@@ -2,6 +2,7 @@
 'use client'
 
 import React from 'react'
+import { useTranslations } from 'next-intl'
 import { useForm } from '@tanstack/react-form'
 import { z } from 'zod'
 import { Button } from '@/components/buttons/Button'
@@ -51,6 +52,7 @@ export function ScheduledTransactionForm({
 }) {
   const router = useRouter()
   const queryClient = useQueryClient()
+  const t = useTranslations('Miru')
   // Helper to get ID from string or object
   const getId = (item: any) => (typeof item === 'object' && item?.id ? item.id : item)
 
@@ -104,8 +106,8 @@ export function ScheduledTransactionForm({
   return (
     <Card className="w-full max-w-lg mx-auto">
       <CardHeader>
-        <CardTitle>{initialData ? 'Edit Subscription' : 'Add Subscription'}</CardTitle>
-        <CardDescription>Record a new recurring bill or subscription.</CardDescription>
+        <CardTitle>{initialData ? 'Edit Subscription' : t('scheduled.addSubscription')}</CardTitle>
+        <CardDescription>{t('scheduled.recordNew')}</CardDescription>
       </CardHeader>
       <CardContent>
         <form
@@ -127,7 +129,7 @@ export function ScheduledTransactionForm({
           >
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Subscription Name</Label>
+                <Label htmlFor={field.name}>{t('scheduled.subscriptionName')}</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -158,7 +160,7 @@ export function ScheduledTransactionForm({
             >
               {(field) => (
                 <div className="space-y-2">
-                  <Label htmlFor={field.name}>Amount</Label>
+                  <Label htmlFor={field.name}>{t('scheduled.amount')}</Label>
                   <Input
                     id={field.name}
                     name={field.name}
@@ -180,7 +182,7 @@ export function ScheduledTransactionForm({
             <form.Field name="frequency">
               {(field) => (
                 <div className="space-y-2">
-                  <Label htmlFor={field.name}>Frequency</Label>
+                  <Label htmlFor={field.name}>{t('scheduled.frequency')}</Label>
                   <Select
                     value={field.state.value}
                     onValueChange={(val) =>
@@ -188,12 +190,12 @@ export function ScheduledTransactionForm({
                     }
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select frequency" />
+                      <SelectValue placeholder={t('scheduled.selectFrequency')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="weekly">Weekly</SelectItem>
-                      <SelectItem value="monthly">Monthly</SelectItem>
-                      <SelectItem value="yearly">Yearly</SelectItem>
+                      <SelectItem value="weekly">{t('scheduled.weekly')}</SelectItem>
+                      <SelectItem value="monthly">{t('scheduled.monthly')}</SelectItem>
+                      <SelectItem value="yearly">{t('scheduled.yearly')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -212,7 +214,7 @@ export function ScheduledTransactionForm({
           >
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Next Due Date</Label>
+                <Label htmlFor={field.name}>{t('scheduled.nextDueDate')}</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -231,13 +233,13 @@ export function ScheduledTransactionForm({
           <form.Field name="account">
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Linked Account (Optional)</Label>
+                <Label htmlFor={field.name}>{t('scheduled.selectAccount')}</Label>
                 <Select value={field.state.value} onValueChange={(val) => field.handleChange(val)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select account" />
+                    <SelectValue placeholder={t('scheduled.selectAccount')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="no-account">No Account</SelectItem>
+                    <SelectItem value="no-account">{t('scheduled.noAccount')}</SelectItem>
                     {accounts.map((acc) => (
                       <SelectItem key={acc.id} value={acc.id}>
                         {acc.name} ({acc.currency})
@@ -252,13 +254,13 @@ export function ScheduledTransactionForm({
           <form.Field name="category">
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Category (Optional)</Label>
+                <Label htmlFor={field.name}>{t('scheduled.selectCategory')}</Label>
                 <Select value={field.state.value} onValueChange={(val) => field.handleChange(val)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select category" />
+                    <SelectValue placeholder={t('scheduled.selectCategory')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="no-category">No Category</SelectItem>
+                    <SelectItem value="no-category">{t('scheduled.noCategory')}</SelectItem>
                     {categories.map((cat) => (
                       <SelectItem key={cat.id} value={cat.id}>
                         {cat.name}

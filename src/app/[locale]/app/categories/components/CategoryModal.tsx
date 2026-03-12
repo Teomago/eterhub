@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import {
   Dialog,
@@ -16,6 +17,7 @@ export function CategoryModal() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [open, setOpen] = useState(false)
+  const t = useTranslations('Miru')
 
   const isAddingCategory = searchParams.get('addCategory') === 'true'
 
@@ -45,8 +47,8 @@ export function CategoryModal() {
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader className="mb-4">
-          <DialogTitle>Add Category</DialogTitle>
-          <DialogDescription>Create a new category for your transactions.</DialogDescription>
+          <DialogTitle>{t('categories.addCategory')}</DialogTitle>
+          <DialogDescription>{t('categories.createNewCategory')}</DialogDescription>
         </DialogHeader>
         <div className="py-4">
           <CategoryForm onSuccess={handleSuccess} />

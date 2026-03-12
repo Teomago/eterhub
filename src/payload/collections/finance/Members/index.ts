@@ -35,7 +35,7 @@ export const Members: CollectionConfig = {
             button: 'Reset Password',
             expiry: 'This link will expire in 1 hour.',
             ignore: 'If you did not request this, please ignore this email.',
-            footer: 'EterHub — Your personal finance assistant',
+            footer: 'Heionhub — Your personal finance assistant',
           },
           es: {
             title: 'Restablecer tu Contraseña',
@@ -44,7 +44,7 @@ export const Members: CollectionConfig = {
             button: 'Restablecer Contraseña',
             expiry: 'Este enlace expirará en 1 hora.',
             ignore: 'Si no solicitaste esto, ignora este correo.',
-            footer: 'EterHub — Tu asistente de finanzas personales',
+            footer: 'Heionhub — Tu asistente de finanzas personales',
           },
         }
 
@@ -73,8 +73,8 @@ export const Members: CollectionConfig = {
       generateEmailSubject: (args) => {
         const locale = args?.user?.preferredLocale || 'en'
         return locale === 'es'
-          ? 'EterHub — Restablecer tu contraseña'
-          : 'EterHub — Reset your password'
+          ? 'Heionhub — Restablecer tu contraseña'
+          : 'Heionhub — Reset your password'
       },
     },
   },

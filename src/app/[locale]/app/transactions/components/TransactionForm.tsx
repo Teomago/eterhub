@@ -2,6 +2,7 @@
 'use client'
 
 import React from 'react'
+import { useTranslations } from 'next-intl'
 import { useForm } from '@tanstack/react-form'
 import { z } from 'zod'
 import { Button } from '@/components/buttons/Button'
@@ -49,6 +50,7 @@ export function TransactionForm({
 }) {
   const router = useRouter()
   const queryClient = useQueryClient()
+  const t = useTranslations('Miru')
   // Helper to get ID from string or object
   const getId = (item: any) => (typeof item === 'object' && item?.id ? item.id : item)
 
@@ -108,8 +110,8 @@ export function TransactionForm({
   return (
     <Card className="w-full max-w-lg mx-auto">
       <CardHeader>
-        <CardTitle>Add Transaction</CardTitle>
-        <CardDescription>Record income, expense, or transfer.</CardDescription>
+        <CardTitle>{t('transactions.addTransaction')}</CardTitle>
+        <CardDescription>{t('transactions.recordIncomeExpenseTransfer')}</CardDescription>
       </CardHeader>
       <CardContent>
         <form
@@ -123,8 +125,8 @@ export function TransactionForm({
           <div className="grid grid-cols-2 gap-4">
             <form.Field name="type">
               {(field) => (
-                <div className="space-y-2">
-                  <Label htmlFor={field.name}>Type</Label>
+              <div className="space-y-2">
+                  <Label htmlFor={field.name}>{t('transactions.type')}</Label>
                   <Select
                     value={field.state.value}
                     onValueChange={(val) =>
@@ -132,12 +134,12 @@ export function TransactionForm({
                     }
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select type" />
+                      <SelectValue placeholder={t('transactions.selectType')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="expense">Expense</SelectItem>
-                      <SelectItem value="income">Income</SelectItem>
-                      <SelectItem value="transfer">Transfer</SelectItem>
+                      <SelectItem value="expense">{t('transactions.expense')}</SelectItem>
+                      <SelectItem value="income">{t('transactions.income')}</SelectItem>
+                      <SelectItem value="transfer">{t('transactions.transfer')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -155,7 +157,7 @@ export function TransactionForm({
             >
               {(field) => (
                 <div className="space-y-2">
-                  <Label htmlFor={field.name}>Date</Label>
+                  <Label htmlFor={field.name}>{t('transactions.date')}</Label>
                   <Input
                     id={field.name}
                     name={field.name}
@@ -186,7 +188,7 @@ export function TransactionForm({
           >
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Amount</Label>
+                <Label htmlFor={field.name}>{t('transactions.amount')}</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -208,7 +210,7 @@ export function TransactionForm({
           <form.Field name="description">
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Description</Label>
+                <Label htmlFor={field.name}>{t('transactions.description')}</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -232,10 +234,10 @@ export function TransactionForm({
           >
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Account</Label>
+                <Label htmlFor={field.name}>{t('transactions.account')}</Label>
                 <Select value={field.state.value} onValueChange={(val) => field.handleChange(val)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select account" />
+                    <SelectValue placeholder={t('transactions.selectAccount')} />
                   </SelectTrigger>
                   <SelectContent>
                     {accounts.map((acc) => (
@@ -255,13 +257,13 @@ export function TransactionForm({
           <form.Field name="category">
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Category (Optional)</Label>
+                <Label htmlFor={field.name}>{t('transactions.category')}</Label>
                 <Select value={field.state.value} onValueChange={(val) => field.handleChange(val)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select category" />
+                    <SelectValue placeholder={t('transactions.selectCategory')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="no-category">No Category</SelectItem>
+                    <SelectItem value="no-category">{t('transactions.noCategory')}</SelectItem>
                     {categories.map((cat) => (
                       <SelectItem key={cat.id} value={cat.id}>
                         {cat.name}
@@ -288,13 +290,13 @@ export function TransactionForm({
                   >
                     {(field) => (
                       <div className="space-y-2">
-                        <Label htmlFor={field.name}>To Account</Label>
+                        <Label htmlFor={field.name}>{t('transactions.toAccount')}</Label>
                         <Select
                           value={field.state.value}
                           onValueChange={(val) => field.handleChange(val)}
                         >
                           <SelectTrigger>
-                            <SelectValue placeholder="Select destination account" />
+                            <SelectValue placeholder={t('transactions.selectDestination')} />
                           </SelectTrigger>
                           <SelectContent>
                             {accounts.map((acc) => (

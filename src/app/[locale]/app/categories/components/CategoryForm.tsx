@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { useTranslations } from 'next-intl'
 import { useForm } from '@tanstack/react-form'
 import { z } from 'zod'
 import { Button } from '@/components/buttons/Button'
@@ -43,6 +44,7 @@ interface CategoryFormProps {
 export function CategoryForm({ category, onSuccess }: CategoryFormProps) {
   const router = useRouter()
   const queryClient = useQueryClient()
+  const t = useTranslations('Miru')
   const form = useForm({
     defaultValues: {
       name: category?.name || '',
@@ -105,7 +107,7 @@ export function CategoryForm({ category, onSuccess }: CategoryFormProps) {
           >
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Category Name</Label>
+                <Label htmlFor={field.name}>{t('categories.categoryName')}</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -124,7 +126,7 @@ export function CategoryForm({ category, onSuccess }: CategoryFormProps) {
           <form.Field name="type">
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Type</Label>
+                <Label htmlFor={field.name}>{t('categories.type')}</Label>
                 <Select
                   value={field.state.value}
                   onValueChange={(val) =>
@@ -132,12 +134,12 @@ export function CategoryForm({ category, onSuccess }: CategoryFormProps) {
                   }
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select type" />
+                    <SelectValue placeholder={t('categories.selectType')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="expense">Expense</SelectItem>
-                    <SelectItem value="income">Income</SelectItem>
-                    <SelectItem value="transfer">Transfer</SelectItem>
+                    <SelectItem value="expense">{t('categories.expense')}</SelectItem>
+                    <SelectItem value="income">{t('categories.income')}</SelectItem>
+                    <SelectItem value="transfer">{t('categories.transfer')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -148,7 +150,7 @@ export function CategoryForm({ category, onSuccess }: CategoryFormProps) {
             <form.Field name="icon">
               {(field) => (
                 <div className="space-y-2">
-                  <Label htmlFor={field.name}>Icon</Label>
+                  <Label htmlFor={field.name}>{t('categories.icon')}</Label>
                   <IconPicker
                     value={field.state.value || ''}
                     onChange={(val) => field.handleChange(val)}
@@ -159,7 +161,7 @@ export function CategoryForm({ category, onSuccess }: CategoryFormProps) {
             <form.Field name="color">
               {(field) => (
                 <div className="space-y-2">
-                  <Label htmlFor={field.name}>Color</Label>
+                  <Label htmlFor={field.name}>{t('categories.color')}</Label>
                   <div className="flex items-center gap-2">
                     <Input
                       id={field.name}
