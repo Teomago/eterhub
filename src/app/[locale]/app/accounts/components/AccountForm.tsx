@@ -28,6 +28,7 @@ import type { Account } from '@/payload/payload-types'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import { useQueryClient } from '@tanstack/react-query'
+import { MoneyInput } from '@/components/ui/money-input'
 
 const accountSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -219,28 +220,28 @@ export function AccountForm({ account, onSuccess }: AccountFormProps) {
                 <Label htmlFor={field.name}>
                   {account ? t('currentBalance') : t('initialBalance')}
                 </Label>
-                <Input
+                <MoneyInput
                   id={field.name}
                   name={field.name}
-                  type="number"
-                  step="0.01"
                   value={
                     field.state.value === 0 && field.state.meta.isTouched ? 0 : field.state.value
                   }
                   onBlur={field.handleBlur}
-                  onChange={(e) => {
-                    const val = parseFloat(e.target.value)
-                    field.handleChange(isNaN(val) ? 0 : val)
-                  }}
+                  onChange={(val) => field.handleChange(val)}
                 />
                 {field.state.meta.errors ? (
                   <p className="text-sm text-destructive">{field.state.meta.errors.join(', ')}</p>
                 ) : null}
                 <p className="text-xs text-muted-foreground">
-                  {form.state.values.type === 'credit'
-                    ? t('creditHelpTextPositive')
-                    : t('balanceHelpText')}
+                  {account
+                    ? t('balanceHelpText')
+                    : "Enter your current actual bank balance. This will be the starting point for your tracking."}
                 </p>
+                {form.state.values.type === 'credit' && (
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {t('creditHelpTextPositive')}
+                  </p>
+                )}
               </div>
             )}
           </form.Field>
@@ -259,17 +260,12 @@ export function AccountForm({ account, onSuccess }: AccountFormProps) {
               {(field) => (
                 <div className="space-y-2">
                   <Label htmlFor={field.name}>{t('creditLimit')}</Label>
-                  <Input
+                  <MoneyInput
                     id={field.name}
                     name={field.name}
-                    type="number"
-                    step="0.01"
-                    value={field.state.value ?? ''}
+                    value={field.state.value ?? 0}
                     onBlur={field.handleBlur}
-                    onChange={(e) => {
-                      const val = parseFloat(e.target.value)
-                      field.handleChange(isNaN(val) ? undefined : val)
-                    }}
+                    onChange={(val) => field.handleChange(val)}
                     placeholder={t('placeholderLimit')}
                   />
                   <p className="text-xs text-muted-foreground">

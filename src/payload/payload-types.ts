@@ -3685,6 +3685,7 @@ export interface Budget {
    */
   recurrenceGroupId?: string | null;
   recurrenceType?: ('monthly' | 'fixed' | 'indefinite') | null;
+  budgetType: 'expense' | 'income';
   owner?: (string | null) | Member;
   updatedAt: string;
   createdAt: string;
@@ -4077,6 +4078,7 @@ export interface BudgetsSelect<T extends boolean = true> {
   currentSpend?: T;
   recurrenceGroupId?: T;
   recurrenceType?: T;
+  budgetType?: T;
   owner?: T;
   updatedAt?: T;
   createdAt?: T;

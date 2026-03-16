@@ -59,6 +59,7 @@ export function TransactionActions({ transaction, accounts, categories }: Transa
       toast.success('Transaction deleted successfully')
       setOpenDelete(false)
       queryClient.invalidateQueries({ queryKey: ['transactions'] })
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] })
       router.refresh()
     }
   }

@@ -93,14 +93,9 @@ export default async function ReportsPage() {
         </Card>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-3">
-        {/* Make this one span 2 columns since it's wider */}
-        <div className="lg:col-span-2">
-          <IncomeVsExpenseChart data={incomeVsExpenseData} />
-        </div>
-        <div>
-          <SpendingChart data={combinedSpendingChartData} />
-        </div>
+      <div className="grid gap-6 grid-cols-1">
+        <IncomeVsExpenseChart data={incomeVsExpenseData} />
+        <SpendingChart data={combinedSpendingChartData} />
       </div>
     </div>
   )

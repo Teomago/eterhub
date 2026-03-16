@@ -114,10 +114,9 @@ export async function deleteTransaction(id: string) {
       throw new APIError('Transaction not found or unauthorized', 404, true)
     }
 
-    await payload.update({
+    await payload.delete({
       collection: 'transactions',
       id,
-      data: { status: 'deleted' },
     })
 
     revalidatePath('/[locale]/app', 'layout')

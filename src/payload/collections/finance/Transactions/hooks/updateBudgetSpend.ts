@@ -7,9 +7,8 @@ function calculateDirectionalAmount(
   type: 'income' | 'expense' | 'transfer',
   amount: number,
 ): number {
-  if (type === 'expense') return amount
-  // Budgets generally only track expenses in this app model
-  return 0
+  if (type === 'transfer') return 0
+  return amount
 }
 
 function getId(relation: any): string | undefined {
@@ -39,21 +38,56 @@ async function applyDelta(payload: any, budgetId: string | undefined, amountToIn
   }
 }
 
+async function findBudgetForTransaction(
+  payload: any,
+  doc: any,
+): Promise<string | undefined> {
+  const explicitBudgetId = getId(doc.budget)
+  if (explicitBudgetId) return explicitBudgetId
+
+  // Transfers and deleted transactions don't count towards budgets
+  if (doc.type === 'transfer' || !doc.category || doc.status === 'deleted') return undefined
+
+  const month = new Date(doc.date).toISOString().slice(0, 7) // YYYY-MM
+  const ownerId = getId(doc.owner)
+
+  try {
+    const matchingBudgets = await payload.find({
+      collection: 'budgets',
+      where: {
+        and: [
+          { category: { equals: getId(doc.category) } },
+          { owner: { equals: ownerId } },
+          { month: { equals: month } },
+          { status: { equals: 'active' } },
+          { budgetType: { equals: doc.type } },
+        ],
+      },
+      limit: 1,
+      pagination: false,
+      depth: 0,
+    })
+
+    return matchingBudgets.docs[0]?.id
+  } catch (error) {
+    console.error('[updateBudgetSpend] Failed to lookup budget:', error)
+    return undefined
+  }
+}
+
 export const updateBudgetSpend: CollectionAfterChangeHook = async ({
   doc,
   previousDoc,
   operation,
   req: { payload },
 }) => {
-  let deltaAmount = 0
-  const budgetId = getId(doc.budget)
+  const budgetId = await findBudgetForTransaction(payload, doc)
+  const prevBudgetId = previousDoc ? await findBudgetForTransaction(payload, previousDoc) : undefined
 
   if (operation === 'create') {
-    deltaAmount = calculateDirectionalAmount(doc.type, doc.amount)
+    const deltaAmount = calculateDirectionalAmount(doc.type, doc.amount)
     await applyDelta(payload, budgetId, deltaAmount)
   } else if (operation === 'update') {
-    const prevBudgetId = getId(previousDoc?.budget)
-
     if (
       doc.amount === previousDoc?.amount &&
       doc.type === previousDoc?.type &&
@@ -63,18 +97,21 @@ export const updateBudgetSpend: CollectionAfterChangeHook = async ({
       return doc
     }
 
+    // If status changed to deleted
     if (previousDoc?.status !== 'deleted' && doc.status === 'deleted') {
-      deltaAmount = -calculateDirectionalAmount(previousDoc.type, previousDoc.amount)
+      const deltaAmount = -calculateDirectionalAmount(previousDoc.type, previousDoc.amount)
       await applyDelta(payload, prevBudgetId, deltaAmount)
       return doc
     }
 
+    // If status changed from deleted
     if (previousDoc?.status === 'deleted' && doc.status !== 'deleted') {
       const restoreDelta = calculateDirectionalAmount(doc.type, doc.amount)
       await applyDelta(payload, budgetId, restoreDelta)
       return doc
     }
 
+    // Handle normal updates (amount, type, or budget/category change)
     if (previousDoc?.status !== 'deleted') {
       const oldDelta = -calculateDirectionalAmount(
         previousDoc?.type || 'expense',

@@ -21,25 +21,26 @@ export function ScheduledTransactionModal({
   const [open, setOpen] = useState(false)
   const t = useTranslations('Miru')
 
-  const isAddingSub = searchParams.get('addSub') === 'true'
-
-  useEffect(() => {
-    if (isAddingSub) {
-      setOpen(true)
-    } else {
-      setOpen(false)
-    }
-  }, [isAddingSub])
-
-  const handleOpenChange = (newOpen: boolean) => {
-    setOpen(newOpen)
-    if (!newOpen) {
-      // Close modal out entirely and remove search params
-      const newSearchParams = new URLSearchParams(searchParams)
-      newSearchParams.delete('addSub')
-      router.replace(`${pathname}?${newSearchParams.toString()}`, { scroll: false })
-    }
-  }
+  const isAddingScheduled = searchParams.get('addScheduled') === 'true' || searchParams.get('addSub') === 'true'
+ 
+   useEffect(() => {
+     if (isAddingScheduled) {
+       setOpen(true)
+     } else {
+       setOpen(false)
+     }
+   }, [isAddingScheduled])
+ 
+   const handleOpenChange = (newOpen: boolean) => {
+     setOpen(newOpen)
+     if (!newOpen) {
+       // Close modal out entirely and remove search params
+       const newSearchParams = new URLSearchParams(searchParams)
+       newSearchParams.delete('addSub')
+       newSearchParams.delete('addScheduled')
+       router.replace(`${pathname}?${newSearchParams.toString()}`, { scroll: false })
+     }
+   }
 
   const handleSuccess = () => {
     handleOpenChange(false)

@@ -26,6 +26,7 @@ import { useRouter } from 'next/navigation'
 import type { Category, Budget } from '@/payload/payload-types'
 import { toast } from 'sonner'
 import { useQueryClient } from '@tanstack/react-query'
+import { MoneyInput } from '@/components/ui/money-input'
 
 const budgetSchema = z.object({
   category: z.string().min(1, 'Category is required'),
@@ -34,6 +35,7 @@ const budgetSchema = z.object({
   month: z.string().regex(/^\d{4}-\d{2}$/, 'Invalid month format'),
   recurrenceType: z.enum(['monthly', 'fixed', 'indefinite']).default('monthly'),
   recurrenceDuration: z.number().min(2).max(24).optional(),
+  budgetType: z.enum(['expense', 'income']).default('expense'),
 })
 
 interface BudgetFormProps {
@@ -45,7 +47,7 @@ interface BudgetFormProps {
 export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
   const router = useRouter()
   const queryClient = useQueryClient()
-  const t = useTranslations('Miru')
+  const t = useTranslations('Miru.budget')
   const form = useForm({
     defaultValues: {
       category:
@@ -57,6 +59,7 @@ export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
       month: budget?.month || new Date().toISOString().slice(0, 7), // YYYY-MM
       recurrenceType: 'monthly' as 'monthly' | 'fixed' | 'indefinite',
       recurrenceDuration: 3,
+      budgetType: (budget?.budgetType as 'expense' | 'income') || 'expense',
     },
     onSubmit: async ({ value }) => {
       let res
@@ -87,8 +90,8 @@ export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
     <Card className={!budget ? 'w-full max-w-lg mx-auto' : 'border-0 shadow-none'}>
       {!budget && (
         <CardHeader>
-          <CardTitle>{t('budget.setBudget')}</CardTitle>
-          <CardDescription>{t('budget.limitSpending')}</CardDescription>
+          <CardTitle>{t('setBudget')}</CardTitle>
+          <CardDescription>{t('limitSpending')}</CardDescription>
         </CardHeader>
       )}
       <CardContent className={budget ? 'p-0' : ''}>
@@ -111,10 +114,10 @@ export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
           >
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>{t('budget.category')}</Label>
+                <Label htmlFor={field.name}>{t('category')}</Label>
                 <Select value={field.state.value} onValueChange={(val) => field.handleChange(val)}>
                   <SelectTrigger>
-                    <SelectValue placeholder={t('budget.selectCategory')} />
+                    <SelectValue placeholder={t('selectCategory')} />
                   </SelectTrigger>
                   <SelectContent>
                     {categories.map((cat) => (
@@ -142,7 +145,7 @@ export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
           >
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>Budget Name (Optional)</Label>
+                <Label htmlFor={field.name}>{t('budgetName')}</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -169,19 +172,13 @@ export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
           >
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>{t('budget.monthlyLimit')}</Label>
-                <Input
+                <Label htmlFor={field.name}>{t('monthlyLimit')}</Label>
+                <MoneyInput
                   id={field.name}
                   name={field.name}
-                  type="number"
-                  step="0.01"
                   value={field.state.value}
                   onBlur={field.handleBlur}
-                  onChange={(e) =>
-                    field.handleChange(
-                      e.target.value === '' ? ('' as any) : parseFloat(e.target.value),
-                    )
-                  }
+                  onChange={(val) => field.handleChange(val)}
                 />
                 {field.state.meta.errors ? (
                   <p className="text-sm text-destructive">{field.state.meta.errors.join(', ')}</p>
@@ -190,10 +187,30 @@ export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
             )}
           </form.Field>
 
+          <form.Field name="budgetType">
+            {(field) => (
+              <div className="space-y-2">
+                <Label htmlFor={field.name}>{t('type') || 'Budget Type'}</Label>
+                <Select
+                  value={field.state.value}
+                  onValueChange={(val: any) => field.handleChange(val)}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="expense">{t('expenseLimit') || 'Expense Limit'}</SelectItem>
+                    <SelectItem value="income">{t('incomeGoal') || 'Income Goal'}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+          </form.Field>
+
           <form.Field name="month">
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>{t('budget.month')}</Label>
+                <Label htmlFor={field.name}>{t('month')}</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -211,7 +228,7 @@ export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
               <form.Field name="recurrenceType">
                 {(field) => (
                   <div className="space-y-2">
-                    <Label htmlFor={field.name}>{t('budget.recurrence')}</Label>
+                    <Label htmlFor={field.name}>{t('recurrence')}</Label>
                     <Select
                       value={field.state.value}
                       onValueChange={(val: any) => field.handleChange(val)}
@@ -221,7 +238,7 @@ export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="monthly">One-time</SelectItem>
-                        <SelectItem value="fixed">{t('budget.fixedDuration')}</SelectItem>
+                        <SelectItem value="fixed">{t('fixedDuration')}</SelectItem>
                         <SelectItem value="indefinite">Indefinite (1 Year)</SelectItem>
                       </SelectContent>
                     </Select>
@@ -229,30 +246,33 @@ export function BudgetForm({ categories, budget, onSuccess }: BudgetFormProps) {
                 )}
               </form.Field>
 
-              <form.Field name="recurrenceDuration">
-                {(field) => {
-                  // only show if type is fixed
-                  const type = form.getFieldValue('recurrenceType')
+              <form.Subscribe selector={(state) => [state.values.recurrenceType]}>
+                {([type]) => {
                   if (type !== 'fixed') return null
                   return (
-                    <div className="space-y-2">
-                      <Label htmlFor={field.name}>Duration (Months)</Label>
-                      <Input
-                        type="number"
-                        min={2}
-                        max={24}
-                        value={field.state.value}
-                        onChange={(e) => field.handleChange(parseInt(e.target.value))}
-                      />
-                    </div>
+                    <form.Field name="recurrenceDuration">
+                      {(field) => (
+                        <div className="space-y-2">
+                          <Label htmlFor={field.name}>{t('recurrenceDuration')}</Label>
+                          <Input
+                            id={field.name}
+                            type="number"
+                            min={2}
+                            max={24}
+                            value={field.state.value}
+                            onChange={(e) => field.handleChange(parseInt(e.target.value))}
+                          />
+                        </div>
+                      )}
+                    </form.Field>
                   )
                 }}
-              </form.Field>
+              </form.Subscribe>
             </div>
           )}
 
           <Button type="submit" className="w-full" disabled={form.state.isSubmitting}>
-            {form.state.isSubmitting ? 'Saving...' : budget ? 'Update Budget' : 'Set Budget'}
+            {form.state.isSubmitting ? t('saving') : budget ? t('updateBudget') : t('setBudget')}
           </Button>
         </form>
       </CardContent>

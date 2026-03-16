@@ -26,6 +26,7 @@ import {
 import { useRouter } from 'next/navigation'
 import { useQueryClient, useMutation } from '@tanstack/react-query'
 import type { Account, Category } from '@/payload/payload-types'
+import { MoneyInput } from '@/components/ui/money-input'
 
 const transactionSchema = z.object({
   amount: z.number(),
@@ -189,16 +190,12 @@ export function TransactionForm({
             {(field) => (
               <div className="space-y-2">
                 <Label htmlFor={field.name}>{t('transactions.amount')}</Label>
-                <Input
+                <MoneyInput
                   id={field.name}
                   name={field.name}
-                  type="number"
-                  step="0.01"
                   value={field.state.value}
                   onBlur={field.handleBlur}
-                  onChange={(e) =>
-                    field.handleChange(e.target.value === '' ? '' : parseFloat(e.target.value))
-                  }
+                  onChange={(val) => field.handleChange(val)}
                 />
                 {field.state.meta.errors ? (
                   <p className="text-sm text-destructive">{field.state.meta.errors.join(', ')}</p>

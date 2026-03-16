@@ -7,6 +7,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/display/C
 import { CategoryActions } from './components/CategoryActions'
 import { Plus, ArrowLeft } from 'lucide-react'
 import { redirect } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
 import { getCategoryIcon } from '@/constants/category-icons'
 
 export default async function CategoriesPage() {
@@ -27,6 +28,8 @@ export default async function CategoriesPage() {
     sort: 'name',
   })
 
+  const t = await getTranslations('Miru.categories')
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -34,12 +37,12 @@ export default async function CategoriesPage() {
           <Link href="/app/budget" className="text-muted-foreground hover:text-foreground">
             <ArrowLeft className="h-6 w-6" />
           </Link>
-          <h1 className="text-3xl font-bold tracking-tight">Categories</h1>
+          <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
         </div>
         <Link href="?addCategory=true">
           <Button>
             <Plus className="mr-2 h-4 w-4" />
-            New Category
+            {t('addCategory')}
           </Button>
         </Link>
       </div>

@@ -146,7 +146,14 @@
       "noBudgetsFound": "No budgets found",
       "noBudgetsDesc": "You haven't set any budgets for this month yet. Create one to start tracking your spending.",
       "unknownCategory": "Unknown Category",
-      "locked": "Locked"
+      "locked": "Locked",
+      "type": "Budget Type",
+      "expenseLimit": "Expense Limit",
+      "incomeGoal": "Income Goal",
+      "budgetName": "Budget Name (Optional)",
+      "recurrenceDuration": "Duration (Months)",
+      "saving": "Saving...",
+      "updateBudget": "Update Budget"
     },
     "categories": {
       "editCategory": "Edit Category",
@@ -162,7 +169,8 @@
       "icon": "Icon",
       "color": "Color",
       "addCategory": "Add Category",
-      "createNewCategory": "Create a new category for your transactions."
+      "createNewCategory": "Create a new category for your transactions.",
+      "title": "Categories"
     },
     "transactions": {
       "addTransaction": "Add Transaction",
@@ -214,7 +222,8 @@
       "saving": "Saving...",
       "updateTransaction": "Update Transaction",
       "saveTransaction": "Save Transaction",
-      "placeholderDesc": "e.g. Grocery shopping"
+      "placeholderDesc": "e.g. Grocery shopping",
+      "transfer": "Transfer"
     },
     "import": {
       "tutorialText": "This tool allows you to instantly upload hundreds of past transactions.",
@@ -239,7 +248,9 @@
       "successToast": "Successfully imported {count} transactions in {timeElapsed}s!",
       "errorToast": "Failed to import transactions.",
       "criticalErrorToast": "A critical error occurred during the import process.",
-      "batchErrorToast": "Failed to import batch starting at row {row}"
+      "batchErrorToast": "Failed to import batch starting at row {row}",
+      "magicPromptTitle": "AI Magic Prompt",
+      "magicPromptBody": "I have a bank CSV that I need to format for Miru. Please transform this data into a valid CSV with exactly the following columns: Date (YYYY-MM-DD), Description, Amount (Positive for income, Negative for expenses), Type (income/expense/transfer), CategoryName (Optional), AccountName (Optional). Do not include any other text in your response."
     },
     "scheduled": {
       "recordNew": "Record a new recurring bill or subscription.",
@@ -272,7 +283,14 @@
       "twelveMonthExpense": "12 Month Expenses",
       "netTwelveMonth": "Net 12 Month",
       "monthlySavingsRate": "Monthly Savings Rate",
-      "currentMonth": "Current month"
+      "currentMonth": "Current month",
+      "spendingByCategory": "Spending by Category",
+      "noSpendingData": "No spending data available.",
+      "amount": "Amount",
+      "incomeVsExpense": "Income vs Expense",
+      "noTransactionData": "No transaction data available yet.",
+      "income": "Income",
+      "expense": "Expense"
     }
   }
 }

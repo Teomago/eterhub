@@ -12,6 +12,7 @@ const createBudgetSchema = z.object({
   month: z.string().regex(/^\d{4}-\d{2}$/, 'Invalid month format (YYYY-MM)'),
   recurrenceType: z.enum(['monthly', 'fixed', 'indefinite']).default('monthly'),
   recurrenceDuration: z.number().min(2).max(24).optional(),
+  budgetType: z.enum(['expense', 'income']).default('expense'),
 })
 
 export async function createBudget(data: z.infer<typeof createBudgetSchema>) {
@@ -63,6 +64,7 @@ export async function createBudget(data: z.infer<typeof createBudgetSchema>) {
           owner: user.id,
           recurrenceGroupId: monthsToCreate > 1 ? recurrenceGroupId : undefined,
           recurrenceType: data.recurrenceType,
+          budgetType: data.budgetType,
         })
       }
     }
@@ -99,6 +101,7 @@ export async function updateBudget(id: string, data: Partial<z.infer<typeof crea
     if (data.month) updateData.month = data.month
     if (data.category) updateData.category = data.category
     if (data.name !== undefined) updateData.name = data.name
+    if (data.budgetType) updateData.budgetType = data.budgetType
 
     await payload.update({
       collection: 'budgets',

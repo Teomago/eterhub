@@ -132,6 +132,20 @@ export const Budgets: CollectionConfig = {
       defaultValue: 'monthly',
     },
     {
+      name: 'budgetType',
+      type: 'select',
+      required: true,
+      label: { en: 'Budget Type', es: 'Tipo de Presupuesto' },
+      options: [
+        { label: { en: 'Expense Limit', es: 'Límite de Gasto' }, value: 'expense' },
+        { label: { en: 'Income Goal', es: 'Meta de Ingreso' }, value: 'income' },
+      ],
+      defaultValue: 'expense',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'owner',
       type: 'relationship',
       relationTo: 'members',

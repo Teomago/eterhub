@@ -128,25 +128,39 @@ export function DashboardClient({ initialData }: { initialData: DashboardData })
             {dashboard.budgetHealth.length === 0 ? (
               <p className="text-sm text-muted-foreground">{t('noBudgets')}</p>
             ) : (
-              dashboard.budgetHealth.map((b) => (
-                <div key={b.id} className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-medium">{b.name}</span>
-                    <span className={b.isOver ? 'text-red-600 font-bold' : ''}>
-                      ${b.spent.toFixed(2)} / ${b.limit.toFixed(2)}
-                    </span>
+              dashboard.budgetHealth.map((b) => {
+                const isIncome = b.budgetType === 'income'
+                return (
+                  <div key={b.id} className="space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <div className="flex flex-col">
+                        <span className="font-medium">{b.name}</span>
+                        <span className={`text-[9px] font-bold uppercase ${isIncome ? 'text-green-600' : 'text-red-600'}`}>
+                          {isIncome ? 'Goal' : 'Limit'}
+                        </span>
+                      </div>
+                      <span className={!isIncome && b.isOver ? 'text-red-600 font-bold' : ''}>
+                        ${b.spent.toFixed(2)} / ${b.limit.toFixed(2)}
+                      </span>
+                    </div>
+                    <div className="h-2 w-full rounded-full bg-secondary overflow-hidden">
+                      <div
+                        className={`h-full ${
+                          isIncome 
+                            ? 'bg-green-500' 
+                            : b.isOver ? 'bg-red-600' : 'bg-primary'
+                        }`}
+                        style={{
+                          width: `${b.progress}%`,
+                          backgroundColor: isIncome 
+                            ? undefined 
+                            : b.isOver ? undefined : b.categoryColor || undefined,
+                        }}
+                      />
+                    </div>
                   </div>
-                  <div className="h-2 w-full rounded-full bg-secondary overflow-hidden">
-                    <div
-                      className={`h-full ${b.isOver ? 'bg-red-600' : 'bg-primary'}`}
-                      style={{
-                        width: `${b.progress}%`,
-                        backgroundColor: b.isOver ? undefined : b.categoryColor || undefined,
-                      }}
-                    />
-                  </div>
-                </div>
-              ))
+                )
+              })
             )}
           </div>
         </div>

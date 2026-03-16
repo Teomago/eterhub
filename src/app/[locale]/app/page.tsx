@@ -66,30 +66,18 @@ export default async function DashboardPage() {
   const { dashboard } = await getDashboardAggregationsWithCache()
   const currentMonthCategorySpend = dashboard.currentMonthCategorySpend
 
-  // Calculate Budget Health for all active budgets using the DB Map
+  // Use the single source of truth from the DB for budgets
   const allBudgetsHealth = budgetsRaw.docs.map((budget: Budget) => {
-    let spentCents = 0
+    const spentCents = budget.currentSpend || 0
+    const limitCents = budget.amount || 0
+    const progress = limitCents > 0 ? (spentCents / limitCents) * 100 : 0
+    const isOver = progress > 100
+
     const categoriesArray = Array.isArray(budget.category)
       ? budget.category
       : budget.category
         ? [budget.category]
         : []
-
-    const categoryIds = categoriesArray.map((c: string | Category) =>
-      typeof c === 'string' ? c : c.id,
-    )
-
-    // O(1) Lookup instead of nested loop over thousands of docs
-    for (const catId of categoryIds) {
-      if (currentMonthCategorySpend[catId]) {
-        spentCents += currentMonthCategorySpend[catId] * 100 // convert back to cents for precision math
-      }
-    }
-
-    const limitCents = budget.amount || 0
-    const progress = limitCents > 0 ? (spentCents / limitCents) * 100 : 0
-    const isOver = progress > 100
-
     const firstCat = categoriesArray[0] as Category | undefined
     const categoryColor = firstCat?.color || null
 

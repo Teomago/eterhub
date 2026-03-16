@@ -161,13 +161,23 @@ export default async function AppLayout(props: { children: React.ReactNode, para
               >
                 <AuthSync />
                 <SidebarLayout isMultiLangEnabled={isMultiLangEnabled}>{children}</SidebarLayout>
-                <Toaster />
-                <TransactionModal accounts={accounts.docs} categories={categories.docs} />
-                <ScheduledTransactionModal accounts={accounts.docs} categories={categories.docs} />
-                <AccountModal />
-                <CategoryModal />
-                <BudgetModal categories={categories.docs} />
-              </TourProvider>
+                 <Toaster />
+                 <React.Suspense fallback={null}>
+                   <TransactionModal accounts={accounts.docs} categories={categories.docs} />
+                 </React.Suspense>
+                 <React.Suspense fallback={null}>
+                   <ScheduledTransactionModal accounts={accounts.docs} categories={categories.docs} />
+                 </React.Suspense>
+                 <React.Suspense fallback={null}>
+                   <AccountModal />
+                 </React.Suspense>
+                 <React.Suspense fallback={null}>
+                   <CategoryModal />
+                 </React.Suspense>
+                 <React.Suspense fallback={null}>
+                   <BudgetModal categories={categories.docs} />
+                 </React.Suspense>
+               </TourProvider>
             </QueryProvider>
           </NextIntlClientProvider>
         </ThemeProvider>

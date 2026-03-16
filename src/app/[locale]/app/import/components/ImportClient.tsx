@@ -160,11 +160,34 @@ export function ImportClient({
 
       <ImportTutorialTour tutorialUrl={tutorialUrl} hasCompleted={hasCompletedImportTour} />
 
-      <div className="flex justify-end gap-2" data-tour-step-id="tour-download-btn">
-        <Button variant="outline" size="sm" onClick={handleDownloadTemplate}>
-          <Download className="mr-2 h-4 w-4" />
-          {t('downloadTemplate')}
-        </Button>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg space-y-2">
+          <h4 className="font-bold flex items-center gap-2 text-primary">
+            <CheckCircle2 className="w-4 h-4" />
+            {t('magicPromptTitle')}
+          </h4>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            {t('magicPromptBody')}
+          </p>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="text-primary hover:text-primary hover:bg-primary/10 px-0"
+            onClick={() => {
+              navigator.clipboard.writeText(t('magicPromptBody'))
+              toast.success("Prompt copied to clipboard!")
+            }}
+          >
+            Copy AI Prompt
+          </Button>
+        </div>
+
+        <div className="flex flex-col justify-end items-end gap-2" data-tour-step-id="tour-download-btn">
+          <Button variant="outline" size="sm" onClick={handleDownloadTemplate} className="w-full md:w-auto">
+            <Download className="mr-2 h-4 w-4" />
+            {t('downloadTemplate')}
+          </Button>
+        </div>
       </div>
 
       {error && (

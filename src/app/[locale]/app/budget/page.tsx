@@ -29,11 +29,6 @@ export default async function BudgetPage() {
     depth: 1,
   })
 
-  // Calculate spent amount per category for current month
-  // We need to fetch transactions for current month grouped by category
-  // Payload local API doesn't support aggregate/groupBy easily yet (maybe verify?).
-  // We can fetch all transactions for the month and calculate in JS (assuming reasonable count).
-
   const categories = await payload.find({
     collection: 'categories',
     where: {
@@ -43,36 +38,6 @@ export default async function BudgetPage() {
     },
     pagination: false,
     sort: 'name',
-  })
-
-  // Start/End of month
-  const startOfMonth = `${currentMonth}-01`
-  const endOfMonth = `${currentMonth}-31` // Loose upper bound covers it
-
-  const transactions = await payload.find({
-    collection: 'transactions',
-    where: {
-      and: [
-        { owner: { equals: user.id } },
-        { date: { greater_than_equal: startOfMonth } },
-        { date: { less_than_equal: endOfMonth } },
-        { type: { equals: 'expense' } }, // Budget tracks expenses
-      ],
-    },
-    limit: 1000,
-    pagination: false,
-  })
-
-  // Map category ID to spent amount
-  const spentByCategory: Record<string, number> = {}
-  transactions.docs.forEach((tx) => {
-    const catId = typeof tx.category === 'object' ? tx.category?.id : tx.category
-    if (catId) {
-      spentByCategory[catId] = (spentByCategory[catId] || 0) + tx.amount
-    } else {
-      // Uncategorized expenses
-      spentByCategory['uncategorized'] = (spentByCategory['uncategorized'] || 0) + tx.amount
-    }
   })
 
   return (
@@ -112,13 +77,13 @@ export default async function BudgetPage() {
           budgets.docs.map((budget) => {
             const category = typeof budget.category === 'object' ? budget.category : null
             const categoryName = category?.name || t('unknownCategory')
-            const catId = category?.id
-            const actualSpent = catId ? spentByCategory[catId] || 0 : 0
 
             const Icon = getCategoryIcon(category?.icon)
             const color = category?.color || '#000000'
 
-            const progress = Math.min((actualSpent / budget.amount) * 100, 100)
+            const currentAmount = budget.currentSpend || 0
+            const progress = Math.min((currentAmount / budget.amount) * 100, 100)
+            const isIncome = budget.budgetType === 'income'
 
             return (
               <Card
@@ -140,17 +105,24 @@ export default async function BudgetPage() {
                       <Icon className="h-4 w-4" />
                     </div>
                     <div className="flex flex-col">
-                      <CardTitle className="text-sm font-medium flex items-center gap-2">
+                      <CardTitle className="text-sm font-medium flex items-center gap-2 text-wrap">
                         {categoryName}
                         {budget.name && (
                           <span className="text-muted-foreground font-normal">({budget.name})</span>
                         )}
                       </CardTitle>
-                      {budget.locked && (
-                        <span className="text-[10px] uppercase font-bold text-muted-foreground flex items-center gap-1">
-                          <Lock className="h-3 w-3" /> {t('locked')}
+                      <div className="flex items-center gap-1.5 mt-0.5">
+                        <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider ${
+                          isIncome ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
+                        }`}>
+                          {isIncome ? t('incomeGoal') : t('expenseLimit')}
                         </span>
-                      )}
+                        {budget.locked && (
+                          <span className="text-[10px] uppercase font-bold text-muted-foreground flex items-center gap-1">
+                            <Lock className="h-3 w-3" /> {t('locked')}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                   <BudgetActions budget={budget} categories={categories.docs} />
@@ -160,8 +132,7 @@ export default async function BudgetPage() {
                     <span className="text-xs text-muted-foreground">{progress.toFixed(0)}%</span>
                   </div>
                   <div className="text-2xl font-bold">
-                    {/* Spent / Budget */}
-                    {(actualSpent / 100).toLocaleString('en-US', {
+                    {(currentAmount / 100).toLocaleString('en-US', {
                       style: 'currency',
                       currency: 'USD',
                     })}
@@ -176,10 +147,16 @@ export default async function BudgetPage() {
                   {/* Progress Bar */}
                   <div className="mt-2 h-2 w-full bg-secondary rounded-full overflow-hidden">
                     <div
-                      className={`h-full ${progress > 100 ? 'bg-red-500' : 'bg-primary'}`}
+                      className={`h-full ${
+                        isIncome 
+                          ? 'bg-green-500' 
+                          : progress > 100 ? 'bg-red-500' : 'bg-primary'
+                      }`}
                       style={{
                         width: `${progress}%`,
-                        backgroundColor: progress <= 100 ? color : undefined,
+                        backgroundColor: isIncome 
+                          ? undefined 
+                          : progress <= 100 ? color : undefined,
                       }}
                     />
                   </div>

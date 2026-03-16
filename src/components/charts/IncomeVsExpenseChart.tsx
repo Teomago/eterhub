@@ -12,6 +12,7 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/display/Card'
+import { useTranslations } from 'next-intl'
 
 interface IncomeVsExpenseChartProps {
   data: {
@@ -22,14 +23,15 @@ interface IncomeVsExpenseChartProps {
 }
 
 export function IncomeVsExpenseChart({ data }: IncomeVsExpenseChartProps) {
+  const t = useTranslations('Miru.reports')
   if (data.length === 0) {
     return (
       <Card className="col-span-1 lg:col-span-2">
         <CardHeader>
-          <CardTitle>Income vs Expense</CardTitle>
+          <CardTitle>{t('incomeVsExpense')}</CardTitle>
         </CardHeader>
         <CardContent className="h-[300px] flex items-center justify-center text-muted-foreground">
-          No transaction data available yet.
+          {t('noTransactionData')}
         </CardContent>
       </Card>
     )
@@ -38,7 +40,7 @@ export function IncomeVsExpenseChart({ data }: IncomeVsExpenseChartProps) {
   return (
     <Card className="col-span-1 lg:col-span-2">
       <CardHeader>
-        <CardTitle>Income vs Expense</CardTitle>
+        <CardTitle>{t('incomeVsExpense')}</CardTitle>
       </CardHeader>
       <CardContent className="h-[300px]">
         <ResponsiveContainer width="100%" height="100%">
@@ -75,10 +77,10 @@ export function IncomeVsExpenseChart({ data }: IncomeVsExpenseChartProps) {
               formatter={(value: any) => [`$${value.toFixed(2)}`, undefined]}
             />
             <Legend iconType="circle" />
-            <Bar dataKey="income" name="Income" fill="#16a34a" radius={[4, 4, 0, 0]} barSize={20} />
+            <Bar dataKey="income" name={t('income')} fill="#16a34a" radius={[4, 4, 0, 0]} barSize={20} />
             <Bar
               dataKey="expense"
-              name="Expense"
+              name={t('expense')}
               fill="#dc2626"
               radius={[4, 4, 0, 0]}
               barSize={20}
