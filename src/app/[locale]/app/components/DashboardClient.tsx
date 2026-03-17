@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import { ArrowUpRight, ArrowDownLeft, ArrowRightLeft, CircleHelp } from 'lucide-react'
@@ -31,11 +31,16 @@ interface DashboardData {
 }
 
 export function DashboardClient({ initialData }: { initialData: DashboardData }) {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
   const t = useTranslations('Dashboard')
   // Claude's Rule: COP fallback if user.currency is undefined or null
   const currency = initialData.userCurrency || 'COP'
-  const formatAmount = (amount: number) =>
-    amount.toLocaleString('es-CO', { style: 'currency', currency })
+  const formatAmount = (amount: number) => {
+    if (!mounted) return `${currency} ${amount.toFixed(2)}`
+    return amount.toLocaleString('es-CO', { style: 'currency', currency })
+  }
 
   // We'll set up a query to refetch this exact dataset every 30 seconds
   const { data: dashboard } = useQuery({
@@ -111,9 +116,7 @@ export function DashboardClient({ initialData }: { initialData: DashboardData })
           className="rounded-lg border bg-card p-4 text-card-foreground shadow-sm"
         >
           <div className="text-sm font-medium text-muted-foreground">{t('totalBalance')}</div>
-          <div className="text-2xl font-bold">
-            {formatAmount(dashboard.totalBalance)}
-          </div>
+          <div className="text-2xl font-bold">{formatAmount(dashboard.totalBalance)}</div>
         </div>
       </div>
 
@@ -123,7 +126,9 @@ export function DashboardClient({ initialData }: { initialData: DashboardData })
           data-tour-step-id={tourSteps.budgetHealth}
           className="rounded-lg border bg-card text-card-foreground shadow-sm p-6"
         >
-          <h3 className="text-lg font-semibold leading-none tracking-tight mb-4">{t('budgetHealth')}</h3>
+          <h3 className="text-lg font-semibold leading-none tracking-tight mb-4">
+            {t('budgetHealth')}
+          </h3>
           <div className="space-y-4">
             {dashboard.budgetHealth.length === 0 ? (
               <p className="text-sm text-muted-foreground">{t('noBudgets')}</p>
@@ -135,26 +140,30 @@ export function DashboardClient({ initialData }: { initialData: DashboardData })
                     <div className="flex items-center justify-between text-sm">
                       <div className="flex flex-col">
                         <span className="font-medium">{b.name}</span>
-                        <span className={`text-[9px] font-bold uppercase ${isIncome ? 'text-green-600' : 'text-red-600'}`}>
+                        <span
+                          className={`text-[9px] font-bold uppercase ${isIncome ? 'text-green-600' : 'text-red-600'}`}
+                        >
                           {isIncome ? 'Goal' : 'Limit'}
                         </span>
                       </div>
                       <span className={!isIncome && b.isOver ? 'text-red-600 font-bold' : ''}>
-                        ${b.spent.toFixed(2)} / ${b.limit.toFixed(2)}
+                        {mounted
+                          ? `${formatAmount(b.spent)} / ${formatAmount(b.limit)}`
+                          : `$${b.spent.toFixed(2)} / $${b.limit.toFixed(2)}`}
                       </span>
                     </div>
                     <div className="h-2 w-full rounded-full bg-secondary overflow-hidden">
                       <div
                         className={`h-full ${
-                          isIncome 
-                            ? 'bg-green-500' 
-                            : b.isOver ? 'bg-red-600' : 'bg-primary'
+                          isIncome ? 'bg-green-500' : b.isOver ? 'bg-red-600' : 'bg-primary'
                         }`}
                         style={{
                           width: `${b.progress}%`,
-                          backgroundColor: isIncome 
-                            ? undefined 
-                            : b.isOver ? undefined : b.categoryColor || undefined,
+                          backgroundColor: isIncome
+                            ? undefined
+                            : b.isOver
+                              ? undefined
+                              : b.categoryColor || undefined,
                         }}
                       />
                     </div>
@@ -167,7 +176,9 @@ export function DashboardClient({ initialData }: { initialData: DashboardData })
 
         {/* Upcoming Bills */}
         <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-          <h3 className="text-lg font-semibold leading-none tracking-tight mb-4">{t('upcomingBills')}</h3>
+          <h3 className="text-lg font-semibold leading-none tracking-tight mb-4">
+            {t('upcomingBills')}
+          </h3>
           <div className="space-y-4">
             {dashboard.upcomingBills.length === 0 ? (
               <p className="text-sm text-muted-foreground">{t('noUpcoming')}</p>
@@ -179,12 +190,13 @@ export function DashboardClient({ initialData }: { initialData: DashboardData })
                     <div>
                       <div className="font-medium text-sm">{sub.name}</div>
                       <div className="text-xs text-muted-foreground capitalize">
-                        {sub.frequency} - {t('due')} {new Date(sub.nextDueDate).toLocaleDateString('es-CO')}
+                        {sub.frequency} - {t('due')}{' '}
+                        {mounted
+                          ? new Date(sub.nextDueDate).toLocaleDateString('es-CO')
+                          : sub.nextDueDate.split('T')[0]}
                       </div>
                     </div>
-                    <div className="font-bold text-sm">
-                      {formatAmount(amount)}
-                    </div>
+                    <div className="font-bold text-sm">{formatAmount(amount)}</div>
                   </div>
                 )
               })
@@ -249,7 +261,10 @@ export function DashboardClient({ initialData }: { initialData: DashboardData })
                       <div>
                         <div className="font-medium">{tx.description || t('noDescription')}</div>
                         <div className="text-sm text-muted-foreground">
-                          {catName} • {new Date(tx.date).toLocaleDateString('es-CO')}
+                          {catName} •{' '}
+                          {mounted
+                            ? new Date(tx.date).toLocaleDateString('es-CO')
+                            : tx.date.split('T')[0]}
                         </div>
                       </div>
                     </div>
