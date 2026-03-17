@@ -35,7 +35,7 @@ export function DashboardClient({ initialData }: { initialData: DashboardData })
   // Claude's Rule: COP fallback if user.currency is undefined or null
   const currency = initialData.userCurrency || 'COP'
   const formatAmount = (amount: number) =>
-    amount.toLocaleString(undefined, { style: 'currency', currency })
+    amount.toLocaleString('es-CO', { style: 'currency', currency })
 
   // We'll set up a query to refetch this exact dataset every 30 seconds
   const { data: dashboard } = useQuery({
@@ -179,7 +179,7 @@ export function DashboardClient({ initialData }: { initialData: DashboardData })
                     <div>
                       <div className="font-medium text-sm">{sub.name}</div>
                       <div className="text-xs text-muted-foreground capitalize">
-                        {sub.frequency} - {t('due')} {new Date(sub.nextDueDate).toLocaleDateString()}
+                        {sub.frequency} - {t('due')} {new Date(sub.nextDueDate).toLocaleDateString('es-CO')}
                       </div>
                     </div>
                     <div className="font-bold text-sm">
@@ -249,7 +249,7 @@ export function DashboardClient({ initialData }: { initialData: DashboardData })
                       <div>
                         <div className="font-medium">{tx.description || t('noDescription')}</div>
                         <div className="text-sm text-muted-foreground">
-                          {catName} • {new Date(tx.date).toLocaleDateString()}
+                          {catName} • {new Date(tx.date).toLocaleDateString('es-CO')}
                         </div>
                       </div>
                     </div>

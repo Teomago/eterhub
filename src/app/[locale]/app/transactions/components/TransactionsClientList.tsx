@@ -206,15 +206,14 @@ export function TransactionsClientList({ initialData, searchParams, accounts, ca
               <div>
                 <div className="font-medium">{tx.description || tDashboard('noDescription')}</div>
                 <div className="text-sm text-muted-foreground">
-                  {mounted ? new Date(tx.date).toLocaleDateString() : tx.date.split('T')[0]} • {category?.name || tDashboard('uncategorized')} •{' '}
-                  {account?.name}
+                  {`${new Date(tx.date).toLocaleDateString('es-CO')} • ${category?.name || tDashboard('uncategorized')} • ${account?.name}`}
                 </div>
               </div>
             </div>
             <div className="flex items-center gap-4">
               <div className={`font-bold ${colorClass}`}>
                 {sign}
-                {(tx.amount / 100).toLocaleString('en-US', {
+                {(tx.amount / 100).toLocaleString('es-CO', {
                   style: 'currency',
                   currency: 'USD',
                 })}
