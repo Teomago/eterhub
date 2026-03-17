@@ -8,11 +8,11 @@ export const translations = defineTranslations({
       name: 'Name',
     },
   },
-  de: {
+  es: {
     tags: {
-      singular: 'Tag',
-      plural: 'Tags',
-      name: 'Name',
+      singular: 'Etiqueta',
+      plural: 'Etiquetas',
+      name: 'Nombre',
     },
   },
 })

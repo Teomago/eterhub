@@ -1,7 +1,7 @@
 import type { DefineTranslationsParam } from './types'
 
 /** Locales supported by the app and by colocated *.translations.ts files. Add a locale here to require it in every translation file (type error until provided). */
-export const SUPPORTED_LOCALES = ['en', 'de'] as const
+export const SUPPORTED_LOCALES = ['en', 'es'] as const
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number]
 
 /** Locale whose keys define the required shape for all other locales. */

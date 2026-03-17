@@ -13,16 +13,16 @@ export const translations = defineTranslations({
       responsiveSizing: 'Responsive Sizing',
     },
   },
-  de: {
+  es: {
     responsive: {
-      type: 'Typ',
-      preset: 'Voreinstellung',
-      custom: 'Benutzerdefiniert',
-      presetSizes: 'Voreingestellte Größen',
-      presetSizesDescription: 'Vordefinierte Größenwerte pro Breakpoint wählen',
-      customSizes: 'Benutzerdefinierte Größen',
-      customSizesDescription: 'Benutzerdefinierte Pixelwerte pro Breakpoint eingeben',
-      responsiveSizing: 'Responsive Größen',
+      type: 'Tipo',
+      preset: 'Preestablecido',
+      custom: 'Personalizado',
+      presetSizes: 'Tamaños preestablecidos',
+      presetSizesDescription: 'Seleccionar valores de tamaño predefinidos por punto de interrupción',
+      customSizes: 'Tamaños personalizados',
+      customSizesDescription: 'Ingresar valores de píxeles personalizados por punto de interrupción',
+      responsiveSizing: 'Dimensionamiento responsivo',
     },
   },
 })

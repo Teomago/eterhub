@@ -11,14 +11,14 @@ export const translations = defineTranslations({
       align: 'Align',
     },
   },
-  de: {
+  es: {
     fields: {
-      none: 'Keine',
-      left: 'Links',
-      center: 'Zentriert',
-      right: 'Rechts',
-      fullWidth: 'Volle Breite',
-      align: 'Ausrichten',
+      none: 'Ninguno',
+      left: 'Izquierda',
+      center: 'Centrado',
+      right: 'Derecha',
+      fullWidth: 'Ancho completo',
+      align: 'Alineación',
     },
   },
 })

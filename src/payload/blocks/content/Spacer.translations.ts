@@ -14,16 +14,16 @@ export const translations = defineTranslations({
       },
     },
   },
-  de: {
+  es: {
     blocks: {
       spacer: {
-        label: 'Abstand',
-        height: 'Höhe',
-        heightXs: 'Sehr klein',
-        heightSm: 'Klein',
-        heightMd: 'Mittel',
-        heightLg: 'Groß',
-        heightXl: 'Sehr groß',
+        label: 'Espaciador',
+        height: 'Altura',
+        heightXs: 'Muy pequeño',
+        heightSm: 'Pequeño',
+        heightMd: 'Medio',
+        heightLg: 'Grande',
+        heightXl: 'Muy grande',
       },
     },
   },

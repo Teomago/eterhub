@@ -9,9 +9,9 @@ export const translations = defineTranslations({
       htmlTagArticle: 'article',
     },
   },
-  de: {
+  es: {
     fields: {
-      htmlTag: 'HTML-Tag',
+      htmlTag: 'Etiqueta HTML',
       htmlTagSection: 'section',
       htmlTagDiv: 'div',
       htmlTagArticle: 'article',

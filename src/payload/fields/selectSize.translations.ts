@@ -12,10 +12,10 @@ export const translations = defineTranslations({
       sizeXl: 'XL',
     },
   },
-  de: {
+  es: {
     fields: {
-      none: 'Keine',
-      size: 'Größe',
+      none: 'Ninguno',
+      size: 'Tamaño',
       sizeXs: 'XS',
       sizeSm: 'SM',
       sizeMd: 'MD',

@@ -14,16 +14,16 @@ export const translations = defineTranslations({
       },
     },
   },
-  de: {
+  es: {
     blocks: {
       banner: {
         label: 'Banner',
-        content: 'Inhalt',
-        type: 'Typ',
-        typeInfo: 'Info',
-        typeWarning: 'Warnung',
-        typeSuccess: 'Erfolg',
-        dismissible: 'Schließbar',
+        content: 'Contenido',
+        type: 'Tipo',
+        typeInfo: 'Información',
+        typeWarning: 'Advertencia',
+        typeSuccess: 'Éxito',
+        dismissible: 'Se puede descartar',
       },
     },
   },

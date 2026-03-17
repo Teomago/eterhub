@@ -14,17 +14,17 @@ export const translations = defineTranslations({
       user: 'User',
     },
   },
-  de: {
+  es: {
     users: {
-      singular: 'Benutzer',
-      plural: 'Benutzer',
-      firstName: 'Vorname',
-      lastName: 'Nachname',
-      name: 'Name',
-      roles: 'Rollen',
-      admin: 'Admin',
+      singular: 'Usuario',
+      plural: 'Usuarios',
+      firstName: 'Nombre',
+      lastName: 'Apellido',
+      name: 'Nombre completo',
+      roles: 'Roles',
+      admin: 'Administrador',
       editor: 'Editor',
-      user: 'Benutzer',
+      user: 'Usuario',
     },
   },
 })

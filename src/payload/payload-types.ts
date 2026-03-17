@@ -449,7 +449,8 @@ export interface HeroBlockType {
   design?: {
     spacing?: ('none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl') | null;
     spacingType?: ('margin' | 'padding') | null;
-    layout?: ('contentLeft' | 'contentRight' | 'contentCenter' | 'overlay') | null;
+    layout?: ('contentLeft' | 'contentRight' | 'contentCenter' | 'overlay' | 'fullOverlay') | null;
+    heroHeight?: ('default' | 'medium' | 'full') | null;
   };
   settings?: {
     id?: string | null;
@@ -610,7 +611,8 @@ export interface Page {
             design?: {
               spacing?: ('none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl') | null;
               spacingType?: ('margin' | 'padding') | null;
-              layout?: ('contentLeft' | 'contentRight' | 'contentCenter' | 'overlay') | null;
+              layout?: ('contentLeft' | 'contentRight' | 'contentCenter' | 'overlay' | 'fullOverlay') | null;
+              heroHeight?: ('default' | 'medium' | 'full') | null;
             };
             settings?: {
               id?: string | null;
@@ -1280,7 +1282,8 @@ export interface Page {
             design?: {
               spacing?: ('none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl') | null;
               spacingType?: ('margin' | 'padding') | null;
-              layout?: ('contentLeft' | 'contentRight' | 'contentCenter' | 'overlay') | null;
+              layout?: ('contentLeft' | 'contentRight' | 'contentCenter' | 'overlay' | 'fullOverlay') | null;
+              heroHeight?: ('default' | 'medium' | 'full') | null;
             };
             settings?: {
               id?: string | null;
@@ -1950,7 +1953,8 @@ export interface Page {
             design?: {
               spacing?: ('none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl') | null;
               spacingType?: ('margin' | 'padding') | null;
-              layout?: ('contentLeft' | 'contentRight' | 'contentCenter' | 'overlay') | null;
+              layout?: ('contentLeft' | 'contentRight' | 'contentCenter' | 'overlay' | 'fullOverlay') | null;
+              heroHeight?: ('default' | 'medium' | 'full') | null;
             };
             settings?: {
               id?: string | null;

@@ -6,9 +6,9 @@ export const translations = defineTranslations({
       responsiveValues: 'Responsive values',
     },
   },
-  de: {
+  es: {
     responsive: {
-      responsiveValues: 'Responsive Werte',
+      responsiveValues: 'Valores responsivos',
     },
   },
 })

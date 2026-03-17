@@ -16,18 +16,18 @@ export const translations = defineTranslations({
       },
     },
   },
-  de: {
+  es: {
     blocks: {
       video: {
         label: 'Video',
-        url: 'Video-URL',
-        urlDescription: 'YouTube- oder Vimeo-URL',
-        poster: 'Vorschaubild',
-        aspectRatio: 'Seitenverhältnis',
+        url: 'URL del video',
+        urlDescription: 'URL de YouTube o Vimeo',
+        poster: 'Imagen de portada',
+        aspectRatio: 'Relación de aspecto',
         ratio16x9: '16:9',
         ratio4x3: '4:3',
         ratio1x1: '1:1',
-        heading: 'Überschrift',
+        heading: 'Encabezado',
       },
     },
   },

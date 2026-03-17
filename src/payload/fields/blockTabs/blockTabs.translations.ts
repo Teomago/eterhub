@@ -8,11 +8,11 @@ export const translations = defineTranslations({
       design: 'Design',
     },
   },
-  de: {
+  es: {
     fields: {
-      tabGeneral: 'Allgemein',
-      tabSettings: 'Einstellungen',
-      design: 'Design',
+      tabGeneral: 'General',
+      tabSettings: 'Ajustes',
+      design: 'Diseño',
     },
   },
 })

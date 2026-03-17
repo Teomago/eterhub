@@ -10,13 +10,13 @@ export const translations = defineTranslations({
       withSuffix: 'With Suffix',
     },
   },
-  de: {
+  es: {
     fields: {
-      spacing: 'Abstand',
+      spacing: 'Espaciado',
       idDescription:
-        'Eindeutiges ID-Feld, das auf die HTML-Komponente angewendet wird, die diesen Block umgibt. Nützlich für Links, um zu diesem bestimmten Block auf einer Seite navigieren zu können.',
-      withPrefix: 'Mit Präfix',
-      withSuffix: 'Mit Suffix',
+        'Campo de ID único, aplicado al componente HTML que envuelve este bloque. Útil para que los enlaces puedan navegar a este bloque particular en una página.',
+      withPrefix: 'Con prefijo',
+      withSuffix: 'Con sufijo',
     },
   },
 })

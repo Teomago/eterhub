@@ -10,13 +10,13 @@ export const translations = defineTranslations({
       credit: 'Credit',
     },
   },
-  de: {
+  es: {
     media: {
-      singular: 'Medium',
-      plural: 'Medien',
-      alt: 'Alt',
-      caption: 'Bildunterschrift',
-      credit: 'Credits',
+      singular: 'Medio',
+      plural: 'Medios',
+      alt: 'Texto alternativo',
+      caption: 'Leyenda',
+      credit: 'Créditos',
     },
   },
 })

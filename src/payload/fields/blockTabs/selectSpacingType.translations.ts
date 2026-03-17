@@ -8,11 +8,11 @@ export const translations = defineTranslations({
       spacingType: 'Spacing Type',
     },
   },
-  de: {
+  es: {
     fields: {
-      padding: 'Abstand innen',
-      margin: 'Abstand außen',
-      spacingType: 'Abstandsart',
+      padding: 'Espaciado interno',
+      margin: 'Espaciado externo',
+      spacingType: 'Tipo de espaciado',
     },
   },
 })

@@ -12,15 +12,15 @@ export const translations = defineTranslations({
       defaultMetaDescription: 'Default meta tags for pages without specific SEO settings',
     },
   },
-  de: {
+  es: {
     seo: {
       title: 'SEO',
-      siteName: 'Seitenname',
-      siteNameDescription: 'Der Name Ihrer Website',
-      tagline: 'Slogan',
-      taglineDescription: 'Eine kurze Beschreibung Ihrer Website',
-      defaultMeta: 'Standard-Meta',
-      defaultMetaDescription: 'Standard-Metadaten für Seiten ohne eigene SEO-Einstellungen',
+      siteName: 'Nombre del sitio',
+      siteNameDescription: 'El nombre de tu sitio web',
+      tagline: 'Eslogan',
+      taglineDescription: 'Una breve descripción de tu sitio web',
+      defaultMeta: 'Metadatos predeterminados',
+      defaultMetaDescription: 'Metadatos predeterminados para páginas sin configuraciones SEO propias',
     },
   },
 })

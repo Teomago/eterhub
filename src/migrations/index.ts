@@ -3,6 +3,7 @@ import * as migration_20260310_232127_init from './20260310_232127_init';
 import * as migration_20260311_014355_i18n_tables from './20260311_014355_i18n_tables';
 import * as migration_20260311_202748_preferred_locale from './20260311_202748_preferred_locale';
 import * as migration_20260316_054717_add_budget_type_field from './20260316_054717_add_budget_type_field';
+import * as migration_20260316_194317_hero_block_updates from './20260316_194317_hero_block_updates';
 
 export const migrations = [
   {
@@ -28,6 +29,11 @@ export const migrations = [
   {
     up: migration_20260316_054717_add_budget_type_field.up,
     down: migration_20260316_054717_add_budget_type_field.down,
-    name: '20260316_054717_add_budget_type_field'
+    name: '20260316_054717_add_budget_type_field',
+  },
+  {
+    up: migration_20260316_194317_hero_block_updates.up,
+    down: migration_20260316_194317_hero_block_updates.down,
+    name: '20260316_194317_hero_block_updates'
   },
 ];

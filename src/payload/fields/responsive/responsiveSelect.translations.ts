@@ -11,14 +11,14 @@ export const translations = defineTranslations({
       fullWidth: 'Full Width',
     },
   },
-  de: {
+  es: {
     responsive: {
-      base: 'Basis',
-      inherit: 'Vererben',
-      responsiveValues: 'Responsive Werte',
+      base: 'Base',
+      inherit: 'Heredar',
+      responsiveValues: 'Valores responsivos',
     },
     fields: {
-      fullWidth: 'Volle Breite',
+      fullWidth: 'Ancho completo',
     },
   },
 })

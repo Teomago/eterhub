@@ -9,12 +9,12 @@ export const translations = defineTranslations({
       containerType: 'Container Type',
     },
   },
-  de: {
+  es: {
     fields: {
-      none: 'Keine',
-      default: 'Standard',
-      post: 'Beitrag',
-      containerType: 'Container-Typ',
+      none: 'Ninguno',
+      default: 'Predeterminado',
+      post: 'Publicación',
+      containerType: 'Tipo de contenedor',
     },
   },
 })

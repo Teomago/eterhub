@@ -10,12 +10,12 @@ export const translations = defineTranslations({
       },
     },
   },
-  de: {
+  es: {
     blocks: {
       richText: {
-        singular: 'Rich-Text-Block',
-        plural: 'Rich-Text-Blöcke',
-        content: 'Inhalt',
+        singular: 'Bloque de texto enriquecido',
+        plural: 'Bloques de texto enriquecido',
+        content: 'Contenido',
       },
     },
   },

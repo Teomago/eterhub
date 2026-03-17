@@ -97,7 +97,9 @@ export const es = {
       "contentLeft": "Contenido a la izquierda",
       "contentRight": "Contenido a la derecha",
       "contentCenter": "Contenido centrado",
-      "overlay": "Superposición"
+      "overlay": "Superposición",
+      "fullOverlay": "Superposición (Ancho total)",
+      "heroHeight": "Altura del Hero"
     },
     "logoCloud": {
       "label": "Nube de logos",

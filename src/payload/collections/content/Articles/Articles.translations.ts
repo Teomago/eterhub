@@ -17,17 +17,17 @@ export const translations = defineTranslations({
       title: 'SEO',
     },
   },
-  de: {
+  es: {
     articles: {
-      singular: 'Artikel',
-      plural: 'Artikel',
-      tabGeneral: 'Allgemein',
-      title: 'Titel',
-      content: 'Inhalt',
-      authors: 'Autoren',
-      tags: 'Tags',
-      excerpt: 'Auszug',
-      featuredImage: 'Beitragsbild',
+      singular: 'Artículo',
+      plural: 'Artículos',
+      tabGeneral: 'General',
+      title: 'Título',
+      content: 'Contenido',
+      authors: 'Autores',
+      tags: 'Etiquetas',
+      excerpt: 'Extracto',
+      featuredImage: 'Imagen destacada',
     },
     seo: {
       title: 'SEO',

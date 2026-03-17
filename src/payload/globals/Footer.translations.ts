@@ -15,18 +15,18 @@ export const translations = defineTranslations({
       copyrightDescription: 'e.g. © 2026 Company Name. All rights reserved.',
     },
   },
-  de: {
+  es: {
     footer: {
-      label: 'Fußzeile',
-      navigation: 'Navigation',
-      contact: 'Kontakt & Social',
-      socialLinks: 'Soziale Links',
-      platform: 'Plattform',
+      label: 'Pie de página',
+      navigation: 'Navegación',
+      contact: 'Contacto y redes sociales',
+      socialLinks: 'Enlaces sociales',
+      platform: 'Plataforma',
       url: 'URL',
-      legal: 'Rechtliches',
-      legalName: 'Firmenname (rechtlich)',
-      copyright: 'Urheberrecht',
-      copyrightDescription: 'z.B. © 2026 Firmenname. Alle Rechte vorbehalten.',
+      legal: 'Legal',
+      legalName: 'Nombre legal de la empresa',
+      copyright: 'Derechos de autor',
+      copyrightDescription: 'Kz. © 2026 Empresa. Todos los derechos reservados.',
     },
   },
 })

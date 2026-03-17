@@ -11,14 +11,14 @@ export const translations = defineTranslations({
       bodyFontDescription: 'Google Font used for body text',
     },
   },
-  de: {
+  es: {
     settings: {
-      globalLabel: 'Allgemein',
-      typography: 'Typografie',
-      headingFont: 'Überschrift-Schriftart',
-      headingFontDescription: 'Google-Schriftart für Überschriften (h1–h6)',
-      bodyFont: 'Fließtext-Schriftart',
-      bodyFontDescription: 'Google-Schriftart für Fließtext',
+      globalLabel: 'Ajustes generales',
+      typography: 'Tipografía',
+      headingFont: 'Fuente de encabezado',
+      headingFontDescription: 'Fuente de Google Fonts para encabezados (h1–h6)',
+      bodyFont: 'Fuente de cuerpo',
+      bodyFontDescription: 'Fuente de Google Fonts para el texto del cuerpo',
     },
   },
 })

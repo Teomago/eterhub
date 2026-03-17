@@ -13,16 +13,16 @@ export const translations = defineTranslations({
     },
     fields: { size: 'Size' },
   },
-  de: {
+  es: {
     blocks: {
       icon: {
-        singular: 'Symbol',
-        plural: 'Symbole',
-        mobile: 'Mobile',
+        singular: 'Icono',
+        plural: 'Iconos',
+        mobile: 'Móvil',
         tablet: 'Tablet',
-        desktop: 'Desktop',
+        desktop: 'Escritorio',
       },
     },
-    fields: { size: 'Größe' },
+    fields: { size: 'Tamaño' },
   },
 })

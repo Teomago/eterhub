@@ -15,18 +15,18 @@ export const translations = defineTranslations({
       ctaEnabled: 'Show CTA Button',
     },
   },
-  de: {
+  es: {
     header: {
-      label: 'Kopfzeile',
-      navLinks: 'Navigationslinks',
-      navLinksDescription: 'Links auf der linken Seite der Kopfzeile',
+      label: 'Encabezado principal',
+      navLinks: 'Enlaces de navegación',
+      navLinksDescription: 'Enlaces en el lado izquierdo del encabezado',
       logo: 'Logo',
-      logoType: 'Logo-Typ',
-      logoNone: 'Keins',
-      logoImage: 'Bild',
-      logoText: 'Text',
-      cta: 'Handlungsaufforderung',
-      ctaEnabled: 'CTA-Button anzeigen',
+      logoType: 'Tipo de logo',
+      logoNone: 'Ninguno',
+      logoImage: 'Imagen',
+      logoText: 'Texto',
+      cta: 'Llamado a la acción',
+      ctaEnabled: 'Mostrar botón CTA',
     },
   },
 })

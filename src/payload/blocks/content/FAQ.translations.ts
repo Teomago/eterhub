@@ -14,16 +14,16 @@ export const translations = defineTranslations({
       },
     },
   },
-  de: {
+  es: {
     blocks: {
       faq: {
-        label: 'FAQ',
-        heading: 'Überschrift',
-        subheading: 'Unterüberschrift',
-        items: 'Fragen',
-        question: 'Frage',
-        answer: 'Antwort',
-        allowMultiple: 'Mehrere gleichzeitig öffnen',
+        label: 'Preguntas frecuentes',
+        heading: 'Encabezado',
+        subheading: 'Subencabezado',
+        items: 'Preguntas',
+        question: 'Pregunta',
+        answer: 'Respuesta',
+        allowMultiple: 'Permitir abrir varias a la vez',
       },
     },
   },

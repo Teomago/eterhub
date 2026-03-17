@@ -15,18 +15,18 @@ export const translations = defineTranslations({
     },
     fields: { align: 'Align' },
   },
-  de: {
+  es: {
     blocks: {
       callToAction: {
-        singular: 'Call-to-Action',
-        plural: 'Call-to-Actions',
-        marginTop: 'Abstand oben',
-        marginBottom: 'Abstand unten',
-        mobile: 'Mobile',
+        singular: 'Llamado a la acción',
+        plural: 'Llamados a la acción',
+        marginTop: 'Margen superior',
+        marginBottom: 'Margen inferior',
+        mobile: 'Móvil',
         tablet: 'Tablet',
-        desktop: 'Desktop',
+        desktop: 'Escritorio',
       },
     },
-    fields: { align: 'Ausrichten' },
+    fields: { align: 'Alineación' },
   },
 })

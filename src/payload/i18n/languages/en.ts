@@ -97,7 +97,9 @@ export const en = {
       "contentLeft": "Content Left",
       "contentRight": "Content Right",
       "contentCenter": "Content Center",
-      "overlay": "Overlay"
+      "overlay": "Overlay",
+      "fullOverlay": "Full Overlay",
+      "heroHeight": "Hero Height"
     },
     "logoCloud": {
       "label": "Logo Cloud",

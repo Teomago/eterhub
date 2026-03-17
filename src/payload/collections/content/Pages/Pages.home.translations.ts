@@ -8,11 +8,11 @@ export const translations = defineTranslations({
         'Set this page as the home page (/). Only one page can be the home page at a time.',
     },
   },
-  de: {
+  es: {
     pages: {
-      isHome: 'Startseite',
+      isHome: 'Página de inicio',
       isHomeDescription:
-        'Diese Seite als Startseite (/) festlegen. Nur eine Seite kann gleichzeitig die Startseite sein.',
+        'Establecer esta página como la página de inicio (/). Solo una página puede ser la página de inicio a la vez.',
     },
   },
 })
